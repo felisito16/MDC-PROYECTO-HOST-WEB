@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url("../../Fuentes/poppins/Poppins-Regular.otf") format("opentype");
+}
+
+* {
+    text-decoration: none
+}
+
+html {
+    background: url("../../img/backgroundImage.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* body {
+    background-image: url("../../img/backgroundImage.jpg");
+     background-size: 100%;
+} */
+
+a:not(.activo):hover {
+    text-decoration: none;
+    outline : none;
+}
+
+.aAumentado {
+    text-decoration: none;
+    color: white;
+    padding: 18px;
+    font-family: Poppins;
+}
+
+.activo {
+    background-color: seagreen;
+}
+
+a:hover {
+    text-decoration: none
+}
+
+.aAumentadohover {
+    color: black;
+    background: lightgreen;
+}
+
