@@ -1,12 +1,12 @@
 // Cuando se cargue la ventana/pagina completamente
 $(window).on("load", function () {
 
-    $("nav a:contains('Inicio')").click(() => { go('../Inicio/Inicio.html') })
-    $("nav a:contains('Pendientes')").click(() => { go('../Pendientes/Pendientes.html') })
-    $("nav a:contains('Erróneas')").click(() => { go('../Erroneas/Erroneas.html') })
-    $("nav a:contains('Trámite')").click(() => { go('../Tramite/Tramite.html') })
-    $("nav a:contains('Ayuda')").click(() => { go('../Ayuda/Ayuda.html') })
-    $("nav a:contains('Cerrar')").click(() => { go('../Login/Login.html') })
+    $("nav a:contains('Inicio')").click(() => { go('../inicio/inicio.html') })
+    $("nav a:contains('Pendientes')").click(() => { go('../pendientes/pendientes.html') })
+    $("nav a:contains('Erróneas')").click(() => { go('../erroneas/erroneas.html') })
+    $("nav a:contains('Trámite')").click(() => { go('../tramite/tramite.html') })
+    $("nav a:contains('Ayuda')").click(() => { go('../ayuda/ayuda.html') })
+    $("nav a:contains('Cerrar')").click(() => { go('../login/login.html') })
 
     // INICIO EVENTO MENU
 
