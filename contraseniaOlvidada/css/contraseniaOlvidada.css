@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url("../poppinsContraseniaOlvidada/Poppins-Regular.otf") format("opentype");
+}
+
+* {
+    font-family: Poppins;
+}
+
+body {
+    background: url("../../img/backgroundImage.jpg") no-repeat center center fixed;
+    background-size:cover;
+}
+
+.divContenedor, .divContenedor2 {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 3%;
+}
+
+.h2Contrasenia {
+    text-align: center;
+}
+
+.inputPassOlvidada {
+    width: 350px;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+.textoDescriptivo {
+    display: block;
+    margin: auto;
+    width: 60%;
+    margin-top: 30px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.divBotones {
+    display: grid;
+    width: 250px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 460px) {
+    .inputPassOlvidada {
+        width: 100%;
+    }
+  }
+@media only screen and (max-width: 630px) {
+    .textoDescriptivo {
+        text-align: justify;
+        text-justify: inter-word;
+        width: 100%;
+    }
+  }
+@media only screen and (max-width: 430px) {
+   .divBotones {
+        width: 100%;
+   }
+}
+
+body {
+    background-color: unset;
+}
+
