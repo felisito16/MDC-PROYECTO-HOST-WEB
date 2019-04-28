@@ -10,9 +10,11 @@ $(window).on("load", function () {
         var textoPass = $("input:eq(1)").val()
 
         if (textoUsuario != "" && textoPass != "") {
-            $.get("https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass, function (res) {
-                console.log(res.user)
-                console.log(res.pass)
+            var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass
+            $.get(uri, function (res) {
+                console.log("URI: "+uri)
+                console.log("USER: "+res.user)
+                console.log("PASS: "+res.pass)
                 if (res.user == textoUsuario) {
                     localStorage.setItem("tk", textoUsuario);
                     location.href = "inicio.html";
