@@ -13,14 +13,8 @@ $(window).on("load", function () {
 
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass
             console.log("URI: " + uri)
-            $.ajax({
-                url: uri,
-                success: function (res) {
-                    /*  $.get(uri, function (res) { */
-                   
-                   
-                }, timeout : 2000
-            }).done(function() {
+            $.get(uri, function (res) {
+            }).done(function (res) {
                 if (res.user == textoUsuario) {
                     console.log("USER: " + res.user)
                     console.log("PASS: " + res.pass)
