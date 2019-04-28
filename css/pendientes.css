@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url("../Fuentes/poppins/Poppins-Regular.otf") format("opentype");
+}
+
+* {
+    font-family: Poppins;
+}
+
+body {
+    background: url("../img/backgroundImage.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.divContenedorTodo {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.h2Registro {
+    text-align: center;
+    color : black;
+    background: none;
+}
+
+.divContenedorPendientes {
+    margin-top: 50px;
+}
+
+.divTablaPendientes {
+    background: white;
+}
+
+.inputSize20 {
+    width: 20%;
+    display: inline-block;
+    margin-bottom: 1%;
+}
+.inputSize10 {
+    width: 10%;
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+.divFormularioBusqueda {
+    margin-top: 2%;
+}
+
+.registroPinchado { background: chocolate; }
+.registroHover { background: burlywood }
