@@ -11,8 +11,8 @@ $(window).on("load", function () {
 
         if (textoUsuario != "" && textoPass != "") {
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass
+            console.log("URI: "+uri)
             $.get(uri, function (res) {
-                console.log("URI: "+uri)
                 console.log("USER: "+res.user)
                 console.log("PASS: "+res.pass)
                 if (res.user == textoUsuario) {
