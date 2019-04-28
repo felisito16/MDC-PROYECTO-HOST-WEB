@@ -10,8 +10,8 @@ $(window).on("load", function () {
         var textoPass = $("input:eq(1)").val()
 
         if (textoUsuario != "" && textoPass != "") {
-            $.get("https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario +"/" + textoPass , function (res) {
-                if (res.user) {
+            $.get("https://proyecto-mdc-api.herokuapp.com/validarUsuario/"+textoUsuario+"/"+textoPass , function (res) {
+                if (res.user == textoUsuario) {
                     localStorage.setItem("tk", textoUsuario);
                     location.href = "inicio.html";
                 } else {
