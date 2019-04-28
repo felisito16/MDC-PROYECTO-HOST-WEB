@@ -11,6 +11,8 @@ $(window).on("load", function () {
 
         if (textoUsuario != "" && textoPass != "") {
             $.get("https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass, function (res) {
+                console.log(res.user)
+                console.log(res.pass)
                 if (res.user == textoUsuario) {
                     localStorage.setItem("tk", textoUsuario);
                     location.href = "inicio.html";
