@@ -1,6 +1,8 @@
 // Cuando se cargue la ventana/pagina completamente
 $(window).on("load", function () {
 
+    // CSS
+
     // Por defecto, Inicio activado en el menu
     $("a.aAumentado:contains('Inicio')").addClass("activo").css({ "pointer-events": "none" })
 
