@@ -11,13 +11,12 @@ $(window).on("load", function () {
 
         if (textoUsuario != "" && textoPass != "") {
             $.get("https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass, function (res) {
-                console.log(res)
-                /* if (res.user == textoUsuario) {
-                        localStorage.setItem("tk", textoUsuario);
-                        location.href = "inicio.html";
-                    } else {
-                        alert("Introduce un usuario y contraseña validos");
-                    } */
+                if (res.user == textoUsuario) {
+                    localStorage.setItem("tk", textoUsuario);
+                    location.href = "inicio.html";
+                } else {
+                    alert("Introduce un usuario y contraseña validos");
+                }
             });
         } else {
             alert("Inserte todos los campos");
