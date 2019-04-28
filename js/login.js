@@ -17,16 +17,19 @@ $(window).on("load", function () {
                 url: uri,
                 success: function (res) {
                     /*  $.get(uri, function (res) { */
+                   
+                   
+                }, timeout : 2000
+            }).done(function() {
+                if (res.user == textoUsuario) {
                     console.log("USER: " + res.user)
                     console.log("PASS: " + res.pass)
-                    if (res.user == textoUsuario) {
-                        localStorage.setItem("tk", textoUsuario);
-                        location.href = "inicio.html";
-                    } else {
-                        alert("Introduce un usuario y contraseña validos");
-                    }
-                }, timeout : 2000
-            });
+                    localStorage.setItem("tk", textoUsuario);
+                    location.href = "inicio.html";
+                } else {
+                    alert("Introduce un usuario y contraseña validos");
+                }
+            })
 
         } else {
             alert("Inserte todos los campos");
