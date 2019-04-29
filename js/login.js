@@ -11,10 +11,8 @@ $(document).ready(function () {
         var textoPass = $("input:eq(1)").val()
 
         if ((textoUsuario != "" || textoUsuario != undefined) && (textoPass != "" || textoPass != undefined)) {
-            var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123"
-            console.log("URI: " + uri)
 
-            $.ajax({
+            /* $.ajax({
                 type: "GET",
                 url: uri,
                 dataType: "json",
@@ -41,23 +39,21 @@ $(document).ready(function () {
             });
         } else {
             alert("Inserte todos los campos");
+        } */
+            var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass;
+            /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123" */
+            console.log("URI: " + uri)
+            $.get(uri, function (res) {
+                if (res.usuario[0].user == textoUsuario) {
+                    localStorage.setItem("tk", res.usuario[0]._id);
+                    location.href = "inicio.html";
+                } else {
+                    alert("Introduce un usuario y contraseña validos");
+                }
+            })
+        } else {
+            alert("Inserte todos los campos");
         }
-        /*  var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass;
-        var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123"
-        console.log("URI: " + uri)
-        $.get(uri, function (res) {
-            console.log("USER:" + res.usuario.user)
-            console.log("PASS:" + res.usuario.pass)
-            console.log("TextoUsuario:" + textoUsuario)
-            console.log("TextoPass:" + textoPass)
-            if (res.usuario.user == textoUsuario) {
-                localStorage.setItem("tk", res.usuario._id);
-                location.href = "inicio.html";
-            } else {
-                alert("Introduce un usuario y contraseña validos");
-            }
-        }) */
-
     });
 
 });
