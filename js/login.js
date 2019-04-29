@@ -15,9 +15,9 @@ $(document).ready(function () {
             console.log("URI: " + uri)
 
             $.ajax({
-                type: "get",
+                type: "GET",
                 url: uri,
-                dataType: JSON,
+                dataType: "json",
                 beforeSend: function () {
                     //console.log("Opteniendo usuario.");
                 },
