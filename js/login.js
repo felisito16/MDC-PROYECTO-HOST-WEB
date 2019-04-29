@@ -16,11 +16,11 @@ $(document).ready(function () {
             /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123" */
             console.log("URI: " + uri)
             $.get(uri, function (res) {
+                console.log("USER:"+res.usuario.user)
+                console.log("PASS:"+res.usuario.pass)
+                console.log("TextoUsuario:"+textoUsuario)
+                console.log("TextoPass:"+textoPass)
                 if (res.usuario.user == textoUsuario) {
-                    console.log("USER:"+res.usuario.user)
-                    console.log("PASS:"+res.usuario.pass)
-                    console.log("TextoUsuario:"+textoUsuario)
-                    console.log("TextoPass:"+textoPass)
                     localStorage.setItem("tk", res.usuario._id);
                     location.href = "inicio.html";
                 } else {
