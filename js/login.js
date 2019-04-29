@@ -17,11 +17,12 @@ $(document).ready(function () {
             $.ajax({
                 type: "get",
                 url: uri,
+                dataType: JSON,
                 beforeSend: function () {
                     //console.log("Opteniendo usuario.");
                 },
                 success: function (res) {
-                    console.log("RES:"+res)
+                    alert(res)
                     console.log("USER:" + res.usuario.user)
                     console.log("PASS:" + res.usuario.pass)
                     console.log("TextoUsuario:" + textoUsuario)
