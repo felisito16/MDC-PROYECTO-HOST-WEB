@@ -12,8 +12,8 @@ $(document).ready(function () {
 
         if ((textoUsuario != "" || textoUsuario != undefined) && (textoPass != "" || textoPass != undefined )) {
 
-            var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass
-            /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123" */
+            /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass; */
+            var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123"
             console.log("URI: " + uri)
             $.get(uri, function (res) {
                 console.log("USER:"+res.usuario.user)
