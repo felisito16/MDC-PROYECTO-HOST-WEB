@@ -43,10 +43,8 @@ $(document).ready(function () {
             console.log("URI: " + uri)
             $.get(uri, function (res) {
                 if (res.usuario[0].user) {
-                    if (res.usuario[0].user == textoUsuario) {
-                        localStorage.setItem("tk", res.usuario[0]._id);
-                        location.href = "inicio.html";
-                    }
+                    localStorage.setItem("tk", res.usuario[0]._id);
+                    location.href = "inicio.html";
                 } else {
                     alert("Introduce un usuario y contraseña validos");
                 }
