@@ -22,8 +22,8 @@ $(document).ready(function () {
                     //console.log("Opteniendo usuario.");
                 },
                 success: function (res) {
+                    alert(res.usuario[0].user)
                     alert(res.usuario.user)
-                    alert(res.usuario)
                     alert(res[0].usuario)
                     alert(res[0].usuario.user)
                     console.log("USER:" + res.usuario.user)
