@@ -5,19 +5,24 @@ $(document).ready(function () {
 
     (localStorage.getItem("tk") != null || localStorage.getItem("tk") != undefined) ? location.href = "login.html" : ""
 
-    var textoUsuario = $("input:eq(0)").val();
-    var textoPass = $("input:eq(1)").val()
+    
 
     $("button:eq(0)").click(function () {
 
-        if (textoUsuario != "" && textoPass != "") {
+        var textoUsuario = $("input:eq(0)").val();
+        var textoPass = $("input:eq(1)").val()
+
+        if ((textoUsuario != "" || textoUsuario != undefined) && (textoPass != "" || textoPass != undefined )) {
 
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass
+            /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123" */
             console.log("URI: " + uri)
             $.get(uri, function (res) {
                 if (res.user == textoUsuario) {
-                    console.log("USER:"+res.user)
+                    console.log("USER:"+res.usuario.user)
+                    console.log("PASS:"+res.usuario.pass)
                     console.log("TextoUsuario:"+textoUsuario)
+                    console.log("TextoPass:"+textoPass)
                     localStorage.setItem("tk", textoUsuario);
                     location.href = "inicio.html";
                 } else {
