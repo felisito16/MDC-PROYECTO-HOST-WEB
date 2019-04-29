@@ -1,5 +1,5 @@
 // Cuando se cargue la ventana/pagina completamente
-$(document).on("load", function () {
+$(document).ready(function () {
 
     // Funcionalidad con la API
 
@@ -15,8 +15,8 @@ $(document).on("load", function () {
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass
             console.log("URI: " + uri)
             $.get(uri, function (res) {
-                if (res.usuario.user == textoUsuario) {
-                    console.log("USER:"+res.usuario.user)
+                if (res.user == textoUsuario) {
+                    console.log("USER:"+res.user)
                     console.log("TextoUsuario:"+textoUsuario)
                     localStorage.setItem("tk", textoUsuario);
                     location.href = "inicio.html";
