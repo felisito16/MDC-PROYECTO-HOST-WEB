@@ -4,9 +4,7 @@ $(document).ready(function () {
     // Funcionalidad con la API
 
     (localStorage.getItem("tk") != null || localStorage.getItem("tk") != undefined) ? location.href = "login.html" : ""
-
     
-
     $("button:eq(0)").click(function () {
 
         var textoUsuario = $("input:eq(0)").val();
@@ -18,12 +16,12 @@ $(document).ready(function () {
             /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123" */
             console.log("URI: " + uri)
             $.get(uri, function (res) {
-                if (res.user == textoUsuario) {
+                if (res.usuario.user == textoUsuario) {
                     console.log("USER:"+res.usuario.user)
                     console.log("PASS:"+res.usuario.pass)
                     console.log("TextoUsuario:"+textoUsuario)
                     console.log("TextoPass:"+textoPass)
-                    localStorage.setItem("tk", textoUsuario);
+                    localStorage.setItem("tk", res.usuario._id);
                     location.href = "inicio.html";
                 } else {
                     alert("Introduce un usuario y contraseña validos");
