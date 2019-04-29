@@ -42,9 +42,11 @@ $(document).ready(function () {
             /* var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/Felix/123" */
             console.log("URI: " + uri)
             $.get(uri, function (res) {
-                if (res.usuario[0].user == textoUsuario) {
-                    localStorage.setItem("tk", res.usuario[0]._id);
-                    location.href = "inicio.html";
+                if (res.usuario[0].user) {
+                    if (res.usuario[0].user == textoUsuario) {
+                        localStorage.setItem("tk", res.usuario[0]._id);
+                        location.href = "inicio.html";
+                    }
                 } else {
                     alert("Introduce un usuario y contraseña validos");
                 }
