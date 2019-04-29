@@ -3,8 +3,6 @@ $(document).ready(function () {
 
     // Funcionalidad con la API
 
-    (localStorage.getItem("tk") != null || localStorage.getItem("tk") != undefined) ? location.href = "login.html" : ""
-
     $("button:eq(0)").click(function () {
 
         var textoUsuario = $("input:eq(0)").val();
