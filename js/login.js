@@ -21,8 +21,7 @@ $(document).ready(function () {
                     //console.log("Opteniendo usuario.");
                 },
                 success: function (res) {
-                    var json = $.parseJSON(res)
-                    console.log(json)
+                    console.log("RES:"+res)
                     console.log("USER:" + res.usuario.user)
                     console.log("PASS:" + res.usuario.pass)
                     console.log("TextoUsuario:" + textoUsuario)
