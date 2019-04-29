@@ -8,7 +8,7 @@ $(document).ready(function () {
         var textoUsuario = $("input:eq(0)").val();
         var textoPass = $("input:eq(1)").val()
 
-        if ((textoUsuario != "" || textoUsuario != undefined) && (textoPass != "" || textoPass != undefined)) {
+        if ((textoUsuario != "") && (textoPass != "") {
 
             /* $.ajax({
                 type: "GET",
@@ -43,10 +43,8 @@ $(document).ready(function () {
             console.log("URI: " + uri)
             $.get(uri, function (res) {
                 if (res.usuario[0].user) {
-                    if (res.usuario[0].user == textoUsuario) {
-                        localStorage.setItem("tk", res.usuario[0]._id);
-                        location.href = "inicio.html";
-                    }
+                    localStorage.setItem("tk", res.usuario[0]._id);
+                    location.href = "inicio.html";
                 } else {
                     alert("Introduce un usuario y contraseña validos");
                 }
