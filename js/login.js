@@ -8,7 +8,7 @@ $(document).ready(function () {
         var textoUsuario = $("input:eq(0)").val();
         var textoPass = $("input:eq(1)").val()
 
-        if ((textoUsuario != "") && (textoPass != "") {
+        if ((textoUsuario != "") && (textoPass != "")) {
 
             /* $.ajax({
                 type: "GET",
