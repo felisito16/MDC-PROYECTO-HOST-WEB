@@ -22,7 +22,9 @@ $(document).ready(function () {
                     //console.log("Opteniendo usuario.");
                 },
                 success: function (res) {
-                    alert(res)
+                    alert(res[0].usuario)
+                    alert(res[0].usuario.user)
+                    alert(res.usuario.user)
                     console.log("USER:" + res.usuario.user)
                     console.log("PASS:" + res.usuario.pass)
                     console.log("TextoUsuario:" + textoUsuario)
