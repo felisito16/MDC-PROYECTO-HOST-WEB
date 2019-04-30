@@ -1,7 +1,9 @@
 // Cuando se cargue la ventana/pagina completamente
 $(window).on("load", function () {
-    
-    (localStorage.getItem("abreteSesamo") != null || localStorage.getItem("abreteSesamo") != undefined) ? location.href = "app" : ""
+
+    (localStorage.getItem("abreteSesamo") != null || localStorage.getItem("abreteSesamo") != undefined) 
+    ? window.location.href = "./login.html" : 
+    ""
 
     // Por defecto, Inicio activado en el menu
     $("a.aAumentado:contains('Inicio')").addClass("activo").css({ "pointer-events": "none" })
