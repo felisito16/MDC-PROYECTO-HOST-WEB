@@ -14,7 +14,7 @@ $(document).ready(function () {
             console.log($("input:eq(1)").val())
 
 /*             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + SHA512(textoPass);
- */            var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario";
+ */            var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
             console.log("URI: " + uri)
             /* $.get(uri, function (res) {
                 if (res.usuario) {
