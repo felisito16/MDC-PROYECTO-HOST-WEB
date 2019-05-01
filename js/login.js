@@ -18,9 +18,12 @@ $(document).ready(function () {
                     if (res.usuario[0].user == textoUsuario) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                         location.href = "inicio.html"; */
+            var textoUser = ("input:eq(0)").val()
+            console.log(textoUser)
             $.post(uri, function (res) {
                 if (res.usuario) {
-                    if (res.usuario[0].user == $("input:eq(0)").val()) {
+
+                    if (res.usuario[0].user == textoUser) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                         location.href = "inicio.html";
                     } else {
