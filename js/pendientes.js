@@ -1,4 +1,7 @@
 // Cuando se cargue la ventana/pagina completamente
+if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abreteSesamo") == undefined) {
+    window.location.href = "./login.html"
+}
 
 $(window).on("load", function () {
 
@@ -8,7 +11,6 @@ $(window).on("load", function () {
 
     // Ocultamos el div de la tabla por defecto, 
     // hasta que se de el caso de que busque o consulte datos
-
 
     // Evento Hover Pendientes/Erroneas h2 (titulo)
     $("h2.h2Registro").hover(function () {

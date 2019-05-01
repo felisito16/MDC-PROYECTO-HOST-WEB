@@ -1,4 +1,7 @@
 // Cuando se cargue la ventana/pagina completamente
+if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abreteSesamo") == undefined) {
+    window.location.href = "./login.html"
+}
 
 $(window).on("load", function () {
 
