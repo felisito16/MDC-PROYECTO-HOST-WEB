@@ -6,7 +6,8 @@ $(document).ready(function () {
     $("button:eq(0)").click(function () {
 
         var textoUsuario = $("input:eq(0)").val();
-        var textoPass = sha256($("input:eq(1)").val())
+        var textoPass = $("input:eq(1)").val();
+        textoPass = SHA512(textoPass);
 
         if ((textoUsuario != "") && (textoPass != "")) {
 
