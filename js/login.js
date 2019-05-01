@@ -11,13 +11,18 @@ $(document).ready(function () {
             var textoUsuario = $("input:eq(0)").val();
             var textoPass = $("input:eq(1)").val();
             textoPass = SHA512(textoPass);
+            console.log(textoPass)
 
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass;
             console.log("URI: " + uri)
             $.get(uri, function (res) {
-                if (res.usuario[0].user == textoUsuario) {
-                    localStorage.setItem("abreteSesamo", res.usuario[0]._id);
-                    location.href = "inicio.html";
+                if (res.usuario[0].user && res.usuario[0].pass) {
+                    if (res.usuario[0].user == textoUsuario) {
+                        localStorage.setItem("abreteSesamo", res.usuario[0]._id);
+                        location.href = "inicio.html";
+                    } else {
+                        alert("Introduce un usuario y contraseña validos");
+                    }
                 } else {
                     alert("Introduce un usuario y contraseña validos");
                 }
@@ -26,7 +31,7 @@ $(document).ready(function () {
             alert("Inserte todos los campos");
         }
     });
-    
+
 });
 
 // Funcion SHA512
