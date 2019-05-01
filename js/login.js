@@ -5,7 +5,7 @@ $(document).ready(function () {
     // Funcionalidad con la API
 
     $("button:eq(0)").click(function () {
-
+        //
         if ((textoUsuario != "") && (textoPass != "")) {
 
             var textoUsuario = $("input:eq(0)").val();
