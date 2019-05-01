@@ -9,7 +9,7 @@ $(document).ready(function () {
         if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
 
             var textoPass = $("input:eq(1)").val();
-            $("input:eq(1)").val() = SHA512(textoPass)
+            $("input:eq(1)").val(SHA512(textoPass))
 
             console.log($("input:eq(1)").val())
 
