@@ -1,8 +1,8 @@
-// Cuando se cargue la ventana/pagina completamente
-(localStorage.getItem("abreteSesamo") != null || localStorage.getItem("abreteSesamo") != undefined) 
-    ? window.location.href = "./login.html" : 
-    ""
+if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abreteSesamo") == undefined) {
+    window.location.href = "./login.html"
+}
 
+// Cuando se cargue la ventana/pagina completamente
 $(window).on("load", function () {
 
     // Por defecto, Inicio activado en el menu
@@ -27,7 +27,5 @@ $(window).on("load", function () {
         $("tbody tr").not(this).removeClass("registroPinchado")
         $(this).removeClass("registroHover").addClass("registroPinchado")
     })
-
-    
 
 })
