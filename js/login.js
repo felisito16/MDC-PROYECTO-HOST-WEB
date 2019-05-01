@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $("button:eq(0)").click(function () {
         //
-        if ((textoUsuario != "") && (textoPass != "")) {
+        if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
 
             var textoPass = $("input:eq(1)").val();
             $("input:eq(1)").val() = SHA512(textoPass)
