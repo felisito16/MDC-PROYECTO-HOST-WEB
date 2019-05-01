@@ -8,8 +8,6 @@ $(document).ready(function () {
         //
         if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
 
-            console.log(toString($("input:eq(1)").val()))
-
 /*             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + SHA512(textoPass);
  */            var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
             console.log("URI: " + uri)
@@ -18,12 +16,10 @@ $(document).ready(function () {
                     if (res.usuario[0].user == textoUsuario) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                         location.href = "inicio.html"; */
-            var textoUser = $("input:eq(0)").val()
-            console.log(toString(textoUser))
             $.post(uri, function (res) {
                 if (res.usuario) {
 
-                    if (res.usuario[0].user == toString(textoUser)) {
+                    if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                         location.href = "inicio.html";
                     } else {
