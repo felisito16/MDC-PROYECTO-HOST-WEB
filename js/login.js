@@ -10,7 +10,7 @@ $(document).ready(function () {
 
             var textoUsuario = $("input:eq(0)").val();
             var textoPass = $("input:eq(1)").val();
-            textoPass = toString(SHA512(textoPass)).toLowerCase();
+            textoPass = toString(SHA512(textoPass[0])).toLowerCase();
             console.log(textoPass)
 
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass;
@@ -65,6 +65,10 @@ function SHA512(str) {
         }
         H[0] = safe_add_2(a, H[0]); H[1] = safe_add_2(b, H[1]); H[2] = safe_add_2(c, H[2]); H[3] = safe_add_2(d, H[3]); H[4] = safe_add_2(e, H[4]); H[5] = safe_add_2(f, H[5]); H[6] = safe_add_2(g, H[6]); H[7] = safe_add_2(h, H[7]);
     }
-    var binarray = []; for (var i = 0; i < H.length; i++) { binarray.push(H[i].highOrder); binarray.push(H[i].lowOrder); }
+    var binarray = [];
+    for (var i = 0; i < H.length; i++) {
+        binarray.push(H[i].highOrder);
+        binarray.push(H[i].lowOrder);
+    }
     return binb2hex(binarray);
 }
