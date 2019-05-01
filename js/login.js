@@ -20,7 +20,7 @@ $(document).ready(function () {
                         location.href = "inicio.html"; */
             $.post(uri, function (res) {
                 if (res.usuario) {
-                    if (res.usuario[0].user == textoUsuario) {
+                    if (res.usuario[0].user == $("input:eq(0)").val()) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                         location.href = "inicio.html";
                     } else {
