@@ -1,15 +1,18 @@
 // Cuando se cargue la ventana/pagina completamente
+
 $(document).ready(function () {
 
     // Funcionalidad con la API
 
     $("button:eq(0)").click(function () {
 
-        var textoUsuario = $("input:eq(0)").val();
-        var textoPass = $("input:eq(1)").val();
-        textoPass = SHA512(textoPass);
-
         if ((textoUsuario != "") && (textoPass != "")) {
+
+            var textoUsuario = $("input:eq(0)").val();
+            var textoPass = $("input:eq(1)").val();
+            $.getscript("./sha512", function () {
+                textoPass = SHA512(textoPass);
+            });
 
             var uri = "https://proyecto-mdc-api.herokuapp.com/validarUsuario/" + textoUsuario + "/" + textoPass;
             console.log("URI: " + uri)
