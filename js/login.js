@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("button:eq(0)").click(function () {
         //
         if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
+            
             let inUser = $("input:eq(0)").val()
             let inPass = $("input:eq(1)").val()
 

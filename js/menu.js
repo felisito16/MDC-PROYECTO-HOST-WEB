@@ -6,7 +6,10 @@ $(window).on("load", function () {
     $("nav a:contains('Erróneas')").click(() => { go('./erroneas.html') })
     $("nav a:contains('Trámite')").click(() => { go('./tramite.html') })
     $("nav a:contains('Ayuda')").click(() => { go('./ayuda.html') })
-    $("nav a:contains('Cerrar')").click(() => { go('./login.html') })
+    $("nav a:contains('Cerrar')").click(() => {
+        localStorage.removeItem("abreteSesamo")
+        go('./login.html')
+    })
 
     // INICIO EVENTO MENU
 
