@@ -11,8 +11,7 @@ $(document).ready(function () {
             var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
             console.log("URI: " + uri)
             $.post(uri, function (res) {
-                console.log("RES USER : " + res.usuario[0].user)
-                console.log("RES PASS : " + res.usuario[0].pass)
+                console.log("RES USER : " + res)
                 if (res.usuario) {
                     if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
