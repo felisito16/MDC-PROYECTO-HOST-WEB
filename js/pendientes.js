@@ -56,154 +56,63 @@ $(window).on("load", function () {
 
     // Buscador Avanzado (NO TOCAR) Funciona 25/04/2019 !!
 
-    // Nombre v2
+    // Nombre v3
     $("input:eq(0)").on("keyup", function () {
         var valor = $(this).val()
-        $("tbody tr").each(function (index) {
-            var $valorRegistro = $(this).find("td:eq(1)").text()
-            if ($valorRegistro.indexOf(valor) != 0) {
-                $(this).addClass("NoMostrarNombre").removeClass("mostrarNombre")
-            } else {
-                $(this).addClass("mostrarNombre").removeClass("NoMostrarNombre")
-            }
-            if ($(this).hasClass("mostrarNombre") == true) {
-
-                if ((($(this).hasClass("mostrarApellido") == true)
-                    || ($(this).hasClass("NoMostrarApellido") == false))
-                    &&
-                    (($(this).hasClass("mostrarGrado") == true)
-                        || ($(this).hasClass("NoMostrarGrado") == false))
-                    &&
-                    (($(this).hasClass("mostrarAnioCurso") == true)
-                        || ($(this).hasClass("NoMostrarAnioCurso") == false))) {
-
-                    $(this).show()
-                }
-            } else {
-                $(this).hide()
-            }
-        })
+        buscador(valor, 4, "mostrarNombre", "NoMostrarNombre", "mostrarApellido",
+            "NoMostrarApellido", "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarGrado", "NoMostrarGrado")
     })
 
-    // Apellido v2
+    // Apellido v3
     $("input:eq(1)").on("keyup", function () {
         var valor = $(this).val()
-        $("tbody tr").each(function (index) {
-            var $valorRegistro = $(this).find("td:eq(2)").text()
-            if ($valorRegistro.indexOf(valor) != 0) {
-                $(this).addClass("NoMostrarApellido").removeClass("mostrarApellido")
-            } else {
-                $(this).addClass("mostrarApellido").removeClass("NoMostrarApellido")
-            }
-            if ($(this).hasClass("mostrarApellido") == true) {
-
-                if ((($(this).hasClass("mostrarNombre") == true)
-                    || ($(this).hasClass("NoMostrarNombre") == false))
-                    &&
-                    (($(this).hasClass("mostrarGrado") == true)
-                        || ($(this).hasClass("NoMostrarGrado") == false))
-                    &&
-                    (($(this).hasClass("mostrarAnioCurso") == true)
-                        || ($(this).hasClass("NoMostrarAnioCurso") == false))) {
-
-                    $(this).show()
-                }
-            } else {
-                $(this).hide()
-            }
-        })
+        buscador(valor, 4, "mostrarApellido", "NoMostrarApellido", "mostrarAnioCurso",
+            "NoMostrarAnioCurso", "mostrarNombre", "NoMostrarNombre", "mostrarGrado", "NoMostrarGrado")
     })
 
-    // Grado v2
+    // Grado v3
     $("select:eq(0)").on("change", function () {
         var valor = $("select:eq(0) option:selected").val()
         if (valor != "Grado") {
-            $("tbody tr").each(function (index) {
-                var $valorRegistro = $(this).find("td:eq(3)").text()
-                if ($valorRegistro.indexOf(valor) != 0) {
-                    $(this).addClass("NoMostrarGrado").removeClass("mostrarGrado")
-                } else {
-                    $(this).addClass("mostrarGrado").removeClass("NoMostrarGrado")
-                }
-                if ($(this).hasClass("mostrarGrado") == true) {
-
-                    if ((($(this).hasClass("mostrarNombre") == true)
-                        || ($(this).hasClass("NoMostrarNombre") == false))
-                        &&
-                        (($(this).hasClass("mostrarApellido") == true)
-                            || ($(this).hasClass("NoMostrarApellido") == false))
-                        &&
-                        (($(this).hasClass("mostrarAnioCurso") == true)
-                            || ($(this).hasClass("NoMostrarAnioCurso") == false))) {
-
-                        $(this).show()
-                    }
-                } else {
-                    $(this).hide()
-                }
-            })
+            buscador(valor, 4, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
+                "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
         }
     })
 
-    // Año Curso v2
+    // Año Curso v3
     $("select:eq(1)").on("change", function () {
         var valor = $("select:eq(1) option:selected").val()
-        buscador(valor, 4, "Año Curso", "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre", "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
-        /* if (valor != "Año Curso") {
-            $("tbody tr").each(function (index) {
-                var $valorRegistro = $(this).find("td:eq(4)").text()
-                if ($valorRegistro.indexOf(valor) != 0) {
-                    $(this).addClass("NoMostrarAnioCurso").removeClass("mostrarAnioCurso")
-                } else {
-                    $(this).addClass("mostrarAnioCurso").removeClass("NoMostrarAnioCurso")
-                }
-                if ($(this).hasClass("mostrarAnioCurso") == true) {
-
-                    if ((($(this).hasClass("mostrarNombre") == true)
-                        || ($(this).hasClass("NoMostrarNombre") == false))
-                        &&
-                        (($(this).hasClass("mostrarApellido") == true)
-                            || ($(this).hasClass("NoMostrarApellido") == false))
-                        &&
-                        (($(this).hasClass("mostrarGrado") == true)
-                            || ($(this).hasClass("NoMostrarGrado") == false))) {
-
-                        $(this).show()
-                    }
-                } else {
-                    $(this).hide()
-                }
-            })
-        } */
+        if (valor != "Año Curso") {
+            buscador(valor, 4, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
+                "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
+        }
     })
-
 })
+
 // FUNCION Buscador / Filtro muticampo
-function buscador(valor, pos, notCampo, HasscampoActual, noHassCampoActual, Hass1, noHassAnio1, Hass2, noHass2, Hass3, noHass3) {
-    if (valor != notCampo) {
-        $("tbody tr").each(function (index) {
-            var $valorRegistro = $(this).find("td:eq(" + pos + ")").text()
-            if ($valorRegistro.indexOf(valor) != 0) {
-                $(this).addClass(noHassCampoActual).removeClass(HasscampoActual)
-            } else {
-                $(this).addClass(HasscampoActual).removeClass(noHassCampoActual)
-            }
-            if ($(this).hasClass(HasscampoActual) == true) {
+function buscador(valor, pos, HasscampoActual, noHassCampoActual, Hass1, noHassAnio1, Hass2, noHass2, Hass3, noHass3) {
+    $("tbody tr").each(function (index) {
+        var $valorRegistro = $(this).find("td:eq(" + pos + ")").text()
+        if ($valorRegistro.indexOf(valor) != 0) {
+            $(this).addClass(noHassCampoActual).removeClass(HasscampoActual)
+        } else {
+            $(this).addClass(HasscampoActual).removeClass(noHassCampoActual)
+        }
+        if ($(this).hasClass(HasscampoActual) == true) {
 
-                if ((($(this).hasClass(Hass1) == true)
-                    || ($(this).hasClass(noHassAnio1) == false))
-                    &&
-                    (($(this).hasClass(Hass2) == true)
-                        || ($(this).hasClass(noHass2) == false))
-                    &&
-                    (($(this).hasClass(Hass3) == true)
-                        || ($(this).hasClass(noHass3) == false))) {
+            if ((($(this).hasClass(Hass1) == true)
+                || ($(this).hasClass(noHassAnio1) == false))
+                &&
+                (($(this).hasClass(Hass2) == true)
+                    || ($(this).hasClass(noHass2) == false))
+                &&
+                (($(this).hasClass(Hass3) == true)
+                    || ($(this).hasClass(noHass3) == false))) {
 
-                    $(this).show()
-                }
-            } else {
-                $(this).hide()
+                $(this).show()
             }
-        })
-    }
+        } else {
+            $(this).hide()
+        }
+    })
 }
