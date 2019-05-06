@@ -9,10 +9,6 @@ $(window).on("load", function () {
     // Por defecto, Pendientes activado en el menu
     $("a.aAumentado:contains('Erróneas')").addClass("activo").css({ "pointer-events": "none" })
 
-    // Ocultamos el div de la tabla por defecto, 
-    // hasta que se de el caso de que busque o consulte datos
-
-
     // Evento Hover Pendientes/Erroneas h2 (titulo)
     $("h2.h2Registro").hover(function () {
         $(this).css({ "background": "#212529", "color": "white" })

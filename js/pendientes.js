@@ -148,7 +148,8 @@ $(window).on("load", function () {
     // Año Curso v2
     $("select:eq(1)").on("change", function () {
         var valor = $("select:eq(1) option:selected").val()
-        if (valor != "Año Curso") {
+        buscador(valor, 4, "Año Curso", "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre", "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
+        /* if (valor != "Año Curso") {
             $("tbody tr").each(function (index) {
                 var $valorRegistro = $(this).find("td:eq(4)").text()
                 if ($valorRegistro.indexOf(valor) != 0) {
@@ -173,7 +174,37 @@ $(window).on("load", function () {
                     $(this).hide()
                 }
             })
-        }
+        } */
     })
 
 })
+// FUNCION Buscador / Filtro muticampo
+
+var buscador = new function (valor, pos, notCampo, HasscampoActual, noHassCampoActual, Hass1, noHassAnio1, Hass2, noHass2, Hass3, noHass3) {
+    if (valor != notCampo) {
+        $("tbody tr").each(function (index) {
+            var $valorRegistro = $(this).find("td:eq(" + pos + ")").text()
+            if ($valorRegistro.indexOf(valor) != 0) {
+                $(this).addClass(noHassCampoActual).removeClass(HasscampoActual)
+            } else {
+                $(this).addClass(HasscampoActual).removeClass(noHassCampoActual)
+            }
+            if ($(this).hasClass(HasscampoActual) == true) {
+
+                if ((($(this).hasClass(Hass1) == true)
+                    || ($(this).hasClass(noHassAnio1) == false))
+                    &&
+                    (($(this).hasClass(Hass2) == true)
+                        || ($(this).hasClass(noHass2) == false))
+                    &&
+                    (($(this).hasClass(Hass3) == true)
+                        || ($(this).hasClass(noHass3) == false))) {
+
+                    $(this).show()
+                }
+            } else {
+                $(this).hide()
+            }
+        })
+    }
+}
