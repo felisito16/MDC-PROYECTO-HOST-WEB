@@ -51,6 +51,8 @@ $(window).on("load", function () {
         })
     })
 
+    // Buscador Avanzado (NO TOCAR) Funciona 06/05/2019 !!
+
     // Nombre v3
     $("input:eq(0)").on("keyup", function () {
         var valor = $(this).val()
