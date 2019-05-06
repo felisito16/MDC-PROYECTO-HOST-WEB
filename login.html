@@ -38,5 +38,7 @@
             </a>
         </div>
 </body>
-
+<script>
+ $("button:eq(0)").click(IniciarSesion()).keyup(function(e) { e.key == "Enter" ? IniciarSesion() : "" })
+</script>
 </html>

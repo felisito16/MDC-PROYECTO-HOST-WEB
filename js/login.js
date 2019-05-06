@@ -4,36 +4,40 @@ $(document).ready(function () {
 
     // Funcionalidad con la API
 
-    $("button:eq(0)").click(function () {
-        //
-        if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
+    $("button:eq(0)").click(IniciarSesion()).keyup(function(e) { e.key == "Enter" ? IniciarSesion() : "" })
+
+});
+
+// Funcion Boton INICIAR SESION
+
+function IniciarSesion() {
+    if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
             
-            let inUser = $("input:eq(0)").val()
-            let inPass = $("input:eq(1)").val()
-
-            console.log(inUser)
-            console.log(inPass)
-
-            var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
-            console.log("URI: " + uri)
-            $.post(uri, {user : inUser, pass : SHA512(inPass)}, function (res) {
-                if (res.usuario[0].user) {
-                    if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
-                        localStorage.setItem("abreteSesamo", res.usuario[0]._id);
-                        location.href = "inicio.html";
-                    } else {
-                        alert("Introduce un usuario y contraseña validos");
-                    }
+        let inUser = $("input:eq(0)").val()
+        let inPass = $("input:eq(1)").val()
+    
+        console.log(inUser)
+        console.log(inPass)
+    
+        var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
+        console.log("URI: " + uri)
+        $.post(uri, {user : inUser, pass : SHA512(inPass)}, function (res) {
+            if (res.usuario[0].user) {
+                if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
+                    localStorage.setItem("abreteSesamo", res.usuario[0]._id);
+                    location.href = "inicio.html";
                 } else {
                     alert("Introduce un usuario y contraseña validos");
                 }
-            })
-        } else {
-            alert("Inserte todos los campos");
-        }
-    });
+            } else {
+                alert("Introduce un usuario y contraseña validos");
+            }
+        })
+    } else {
+        alert("Inserte todos los campos");
+    }
+}
 
-});
 
 // Funcion SHA512
 //code of SHA512 function
