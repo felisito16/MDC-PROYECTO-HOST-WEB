@@ -59,14 +59,14 @@ $(window).on("load", function () {
     // Nombre v3
     $("input:eq(0)").on("keyup", function () {
         var valor = $(this).val()
-        buscador(valor, 4, "mostrarNombre", "NoMostrarNombre", "mostrarApellido",
+        buscador(valor, 1, "mostrarNombre", "NoMostrarNombre", "mostrarApellido",
             "NoMostrarApellido", "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarGrado", "NoMostrarGrado")
     })
 
     // Apellido v3
     $("input:eq(1)").on("keyup", function () {
         var valor = $(this).val()
-        buscador(valor, 4, "mostrarApellido", "NoMostrarApellido", "mostrarAnioCurso",
+        buscador(valor, 2, "mostrarApellido", "NoMostrarApellido", "mostrarAnioCurso",
             "NoMostrarAnioCurso", "mostrarNombre", "NoMostrarNombre", "mostrarGrado", "NoMostrarGrado")
     })
 
@@ -74,7 +74,7 @@ $(window).on("load", function () {
     $("select:eq(0)").on("change", function () {
         var valor = $("select:eq(0) option:selected").val()
         if (valor != "Grado") {
-            buscador(valor, 4, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
+            buscador(valor, 3, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
                 "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
         }
     })
