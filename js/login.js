@@ -4,7 +4,8 @@ $(document).ready(function () {
 
     // Funcionalidad con la API
 
-    $("button:eq(0)").click(IniciarSesion()).keyup(function(e) { e.key == "Enter" ? IniciarSesion() : "" })
+    $("button:eq(0)").click(IniciarSesion())
+    $(document).keyup(function(e) { e.key == "Enter" ? IniciarSesion() : "" })
 
 });
 
