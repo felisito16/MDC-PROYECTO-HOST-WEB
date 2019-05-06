@@ -179,8 +179,7 @@ $(window).on("load", function () {
 
 })
 // FUNCION Buscador / Filtro muticampo
-
-var buscador = new function (valor, pos, notCampo, HasscampoActual, noHassCampoActual, Hass1, noHassAnio1, Hass2, noHass2, Hass3, noHass3) {
+function buscador(valor, pos, notCampo, HasscampoActual, noHassCampoActual, Hass1, noHassAnio1, Hass2, noHass2, Hass3, noHass3) {
     if (valor != notCampo) {
         $("tbody tr").each(function (index) {
             var $valorRegistro = $(this).find("td:eq(" + pos + ")").text()
