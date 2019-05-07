@@ -1,12 +1,12 @@
 // Cuando se cargue la ventana/pagina completamente
-
 $(document).ready(function () {
 
     // Funcionalidad con la API
-
     $("button:eq(0)").click(IniciarSesion())
-    $("input").keyup(function (e) {
-        e.keyCode === 13 ? IniciarSesion() : ""
+    $("input").keypress(function (e) {
+        if (e.which == 13) {
+            $("button:eq(0)").click()
+        }
     })
 
 });
