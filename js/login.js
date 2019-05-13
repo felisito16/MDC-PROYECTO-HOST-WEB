@@ -38,10 +38,10 @@ function IniciarSesion() {
         })
 
         $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res) {
-            console.log(res.usario[0])
-            if (res.usuario[0]) {
-                console.log("USER:"+res.usario[0].user)
-                console.log("PASS:"+res.usario[0].pass)
+            console.log(res.usuario)
+            if (res.usuario) {
+                console.log("USER:"+res.usuario[0].user)
+                console.log("PASS:"+res.usuario[0].pass)
                 if (res.usuario[0].user && res.usuario[0].pass) {
                     if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
