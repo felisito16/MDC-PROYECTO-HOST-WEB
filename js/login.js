@@ -38,10 +38,21 @@ function IniciarSesion() {
         })
 
         $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res) {
-            if (res.usuario[0].user && res.usuario[0].pass) {
-                if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
-                    localStorage.setItem("abreteSesamo", res.usuario[0]._id);
-                    location.href = "inicio.html";
+            console.log(res.usario[0])
+            if (res.usuario[0]) {
+                console.log("USER:"+res.usario[0].user)
+                console.log("PASS:"+res.usario[0].pass)
+                if (res.usuario[0].user && res.usuario[0].pass) {
+                    if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
+                        localStorage.setItem("abreteSesamo", res.usuario[0]._id);
+                        location.href = "inicio.html";
+                    } else {
+                        $(".divContenedor div").not(":eq(0)").each((function (index) {
+                            $(this).show()
+                        }))
+                        $("#load").hide()
+                        alert("Introduce un usuario y contraseña validos");
+                    }
                 } else {
                     $(".divContenedor div").not(":eq(0)").each((function (index) {
                         $(this).show()
