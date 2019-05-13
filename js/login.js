@@ -2,6 +2,7 @@
 
 
 $(document).ready(function () {
+
     // Funcionalidad con la API
     $("button:eq(0)").click(() => { IniciarSesion() })
     $("input").focus(function () {
@@ -36,14 +37,7 @@ function IniciarSesion() {
             "margin-right": "auto"
         })
 
-        $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res, err) {
-            if (err) {
-                console.log(err)
-                $(".divContenedor div").not(":eq(0)").each((function (index) {
-                    $(this).show()
-                }))
-                alert("Introduce un usuario y contraseña validos");
-            }
+        $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res) {
             if (res.usuario[0].user) {
                 if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
                     localStorage.setItem("abreteSesamo", res.usuario[0]._id);
@@ -52,12 +46,14 @@ function IniciarSesion() {
                     $(".divContenedor div").not(":eq(0)").each((function (index) {
                         $(this).show()
                     }))
+                    $("#load").hide()
                     alert("Introduce un usuario y contraseña validos");
                 }
             } else {
                 $(".divContenedor div").not(":eq(0)").each((function (index) {
                     $(this).show()
                 }))
+                $("#load").hide()
                 alert("Introduce un usuario y contraseña validos");
             }
         })
