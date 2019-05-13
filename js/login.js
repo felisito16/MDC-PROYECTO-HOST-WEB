@@ -3,13 +3,13 @@ $(document).ready(function () {
 
     // Funcionalidad con la API
     $("button:eq(0)").click(IniciarSesion())
-    $("input").keypress(function (e) {
-        if (e.which == 13) {
-            $("button:eq(0)").click()
-            return false
-        }
+    $("input").focus(function () {
+        $(this).keydown(function (e) {
+            if (e.key == "Enter") {
+                IniciarSesion()
+            }
+        })
     })
-
 });
 
 // Funcion Boton INICIAR SESION
