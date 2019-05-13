@@ -38,7 +38,7 @@ function IniciarSesion() {
         })
 
         $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res) {
-            if (res.usuario[0].user) {
+            if (res.usuario[0].user && res.usuario[0].pass) {
                 if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
                     localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                     location.href = "inicio.html";
