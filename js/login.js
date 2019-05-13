@@ -42,9 +42,15 @@ function IniciarSesion() {
                         localStorage.setItem("abreteSesamo", res.usuario[0]._id);
                         location.href = "inicio.html";
                     } else {
+                        $(".divContenedor div").not(":eq(0)").each((function (index) {
+                            $(this).show()
+                        }))
                         alert("Introduce un usuario y contraseña validos");
                     }
                 } else {
+                    $(".divContenedor div").not(":eq(0)").each((function (index) {
+                        $(this).show()
+                    }))
                     alert("Introduce un usuario y contraseña validos");
                 }
             })
