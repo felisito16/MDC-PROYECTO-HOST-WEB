@@ -2,8 +2,31 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
     window.location.href = "./login.html"
 }
 
+const uri = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
+
+$.post(uri, { estado: "pendiente", rows: "6" }, function (res) {
+    if (res.matriculas) {
+        var json = res.matriculas
+        var json = res.matriculas
+        var jsonLength = json.length
+        $(".tbodyPendientes")
+            .append($("<tr><td>"
+                + json[0].nombre_completo.nombre + " "
+                + json[0].nombre_completo.primer_apellido + " "
+                + json[0].nombre_completo.segundo_apellido
+                + "</td></tr>"))
+        //$(".tbodyPendientes tr td:eq(1)").hide()
+    } else {
+        console.log(res)
+    }
+
+})
+
 // Cuando se cargue la ventana/pagina completamente
 $(window).on("load", function () {
+
+    // Peticion POST
+
 
     // Por defecto, Inicio activado en el menu
     $("a.aAumentado:contains('Inicio')").addClass("activo").css({ "pointer-events": "none" })
