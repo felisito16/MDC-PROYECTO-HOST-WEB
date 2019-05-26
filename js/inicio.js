@@ -16,6 +16,7 @@ $.post(uri, { estado: "pendiente", rows: "6" }, function (res) {
 
 // Cargando matriculas erroneas
 $.post(uri, { estado: "erronea", rows: "6" }, function (res) {
+    
     if (res.matriculas) {
         var json = res.matriculas
         var jsonLength = res.matriculas.length
