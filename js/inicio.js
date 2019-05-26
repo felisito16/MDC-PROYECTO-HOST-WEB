@@ -4,29 +4,27 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
 
 const uri = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
 
+// Cargando matriculas pendientes
 $.post(uri, { estado: "pendiente", rows: "6" }, function (res) {
     if (res.matriculas) {
-        var json = res.matriculas
-        var json = res.matriculas
-        var jsonLength = json.length
-        $(".tbodyPendientes")
-            .append($("<tr><td>"
-                + json[0].nombre_completo.nombre + " "
-                + json[0].nombre_completo.primer_apellido + " "
-                + json[0].nombre_completo.segundo_apellido
-                + "</td></tr>"))
-        //$(".tbodyPendientes tr td:eq(1)").hide()
-    } else {
-        console.log(res)
-    }
 
+        var json = res.matriculas
+        var jsonLength = res.matriculas.length
+        MostrarMatriculas("Pendientes", json, jsonLength)
+    }
+})
+
+// Cargando matriculas erroneas
+$.post(uri, { estado: "erronea", rows: "6" }, function (res) {
+    if (res.matriculas) {
+        var json = res.matriculas
+        var jsonLength = res.matriculas.length
+        MostrarMatriculas("Erroneas", json, jsonLength)
+    }
 })
 
 // Cuando se cargue la ventana/pagina completamente
 $(window).on("load", function () {
-
-    // Peticion POST
-
 
     // Por defecto, Inicio activado en el menu
     $("a.aAumentado:contains('Inicio')").addClass("activo").css({ "pointer-events": "none" })
@@ -38,17 +36,39 @@ $(window).on("load", function () {
         $(this).css({ "background": "none", "color": "black" })
     })
 
-    // Evento Hover registros
-    $("tbody tr").not(document.getElementsByClassName("registroPinchado")).hover(function () {
-        ($(this).hasClass("registroPinchado") == false) ? $(this).addClass("registroHover") : ""
-    }, function () {
-        $(this).removeClass("registroHover")
-    })
-
-    //  Evento Hover registroPinchado
-    $("tbody tr").click(function () {
-        $("tbody tr").not(this).removeClass("registroPinchado")
-        $(this).removeClass("registroHover").addClass("registroPinchado")
-    })
-
 })
+
+// Funciones
+
+// function MostrarMatriculas(estado, json, jsonLength)
+// estado: Pendientes, Erroneas
+// json: res.matriculas
+// jsonLength: Ancho de res.matriculas (res.matriculas.length)
+function MostrarMatriculas(estado, json, jsonLength) {
+
+    var i = 0
+
+    for (i = 0; i < jsonLength; i++) {
+        $(".tbody" + estado)
+            .append($("<tr><td>"
+                + json[i].nombre_completo.nombre + " "
+                + json[i].nombre_completo.primer_apellido + " "
+                + json[i].nombre_completo.segundo_apellido
+                + "</td><td>"
+                + json[i].ciclo_formativo.ciclo
+                + "</td><td>"
+                + json[i].ciclo_formativo.curso
+                + "</td></tr>"))
+        //$(".tbodyPendientes tr td:eq(1)").hide()
+        $(".tbody" + estado + " tr").not(document.getElementsByClassName("registroPinchado")).hover(function () {
+            ($(this).hasClass("registroPinchado") == false) ? $(this).addClass("registroHover") : ""
+        }, function () {
+            $(this).removeClass("registroHover")
+        })
+        $(".tbody" + estado + " tr").click(function () {
+            $(".tbody" + estado + " tr").not(this).removeClass("registroPinchado")
+            $(this).removeClass("registroHover").addClass("registroPinchado")
+        })
+    }
+}
+
