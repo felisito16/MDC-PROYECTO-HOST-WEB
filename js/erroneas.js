@@ -84,7 +84,12 @@ $(window).on("load", function () {
                 "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
         }
     })
+
+    // ALEX AQUI droga buena
+
 })
+
+
 
 // FUNCION Buscador / Filtro muticampo
 function buscador(valor, pos, HasscampoActual, noHassCampoActual, Hass1, noHassAnio1, Hass2, noHass2, Hass3, noHass3) {
