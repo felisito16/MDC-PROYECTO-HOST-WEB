@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Login</title>
+    <title>Sign up</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="icon" href="./img/favicon.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -16,37 +16,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/loginFelix.css">
-    <script src="./js/login.js"></script>
+    <link rel="stylesheet" href="./css/signUp.css">
+    <script src="./js/signUp.js"></script>
 </head>
 
 <body>
     <div class="divContenedor">
         <div class="divh1">
-            <h1>Administracion de matriculas</h1>
+            <h1>Registro</h1>
+        </div>
+        <div class="divTextoRegistro">
+            <p class="pTextoRegistro">
+                ¡ Hola ! para registrarte basta con que nos des una
+                cuenta de correo electronico y una contraseña.
+            </p>
         </div>
         <div class="divInput">
             <input name="user" class="inputSize inputUsuario form-control" type="text" placeholder="Usuario">
             <input name="pass" class="inputSize form-control" type="password" placeholder="Contraseña">
         </div>
         <div class="divButton">
-            <button class="buttonSize btn btn-success">INICIAR SESIÓN</button>
-        </div>
-        <div class="divPassOlvidada">
-            <p>
-                <a href="./signUp.html">
-                    <span>Crear una cuenta</span>
-                </a>
-                <span> - </span>
-                <a href="./passForget.html">
-                    <span>¿Olvidaste la contraseña?</span>
-                </a>
-            </p>
+            <button class="buttonSize btn btn-success">SIGN UP</button>
+            <button class="buttonSize btn btn-primary" style="margin-top: 2%;">Volver</button>
+            <img style="display: none" id="load" src="./img/loading.gif">
         </div>
     </div>
-    <img style="display: none" id="load" src="./img/loading.gif">
+
 </body>
-<script>
-</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 </html>
