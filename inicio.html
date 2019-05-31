@@ -16,7 +16,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="./js/inicio.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="./js/inicio-AngularJS.js"></script>
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/InicioFelix.css">
     <script src="./js/menu.js"></script>
@@ -34,38 +35,54 @@
             <a class="nav-item aAumentado">Ayuda</a>
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
-
-        <div class="divContenedorPendientes">
-            <h2 class="h2Registro">Pendientes</h2>
-            <div class="divTablaPendientes">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Alumno</th>
-                            <th scope="col">Ciclo</th>
-                            <th scope="col">Curso</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbodyPendientes">
-
-                    </tbody>
-                </table>
+        <div ng-app="myApp" ng-controller="controller-loadMatriculas">
+            <div class="divContenedorPendientes">
+                <h2 class="h2Registro">Pendientes</h2>
+                <div class="divTablaPendientes">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Alumno</th>
+                                <th scope="col">Ciclo</th>
+                                <th scope="col">Curso</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbodyPendientes">
+                            <tr ng-repeat="matricula in matriculasPendientes">
+                                <td>{{ matricula.nombre_completo.nombre 
+                                    +" "+ matricula.nombre_completo.primer_apellido
+                                    +" "+ matricula.nombre_completo.segundo_apellido }}
+                                </td>
+                                <td>{{ matricula.ciclo_formativo.ciclo }}</td>
+                                <td>{{ matricula.ciclo_formativo.curso }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="divContenedorErroneas">
-            <h2 class="h2Registro">Erróneas</h2>
-            <div class="divTablaErroneas">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Alumno</th>
-                            <th scope="col">Ciclo</th>
-                            <th scope="col">Curso</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbodyErroneas">
-                    </tbody>
-                </table>
+            <div class="divContenedorErroneas">
+                <h2 class="h2Registro">Erróneas</h2>
+                <div class="divTablaErroneas">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Alumno</th>
+                                <th scope="col">Ciclo</th>
+                                <th scope="col">Curso</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="matricula in matriculasErroneas" class="tbodyErroneas">
+                            <tr ng-repeat="matricula in matriculasErroneas">
+                                <td>{{ matricula.nombre_completo.nombre 
+                                    +" "+ matricula.nombre_completo.primer_apellido
+                                    +" "+ matricula.nombre_completo.segundo_apellido }}
+                                </td>
+                                <td>{{ matricula.ciclo_formativo.ciclo }}</td>
+                                <td>{{ matricula.ciclo_formativo.curso }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

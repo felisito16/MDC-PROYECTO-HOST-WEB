@@ -9,7 +9,7 @@
 
 body {
     background: url("../img/backgroundImage.jpg") no-repeat center center fixed;
-    background-size:cover;
+    background-size: cover;
 }
 
 .divContenedor, .divContenedor2 {
@@ -51,21 +51,22 @@ body {
     .inputPassOlvidada {
         width: 100%;
     }
-  }
+}
+
 @media only screen and (max-width: 630px) {
     .textoDescriptivo {
         text-align: justify;
         text-justify: inter-word;
         width: 100%;
     }
-  }
+}
+
 @media only screen and (max-width: 430px) {
-   .divBotones {
+    .divBotones {
         width: 100%;
-   }
+    }
 }
 
 body {
     background-color: unset;
 }
-

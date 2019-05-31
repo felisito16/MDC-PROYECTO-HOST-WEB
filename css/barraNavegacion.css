@@ -19,7 +19,7 @@
 
 a:not(.activo):hover {
     text-decoration: none;
-    outline : none;
+    outline: none;
 }
 
 .aAumentado {
@@ -41,4 +41,3 @@ a:hover {
     color: black;
     background: lightgreen;
 }
-
