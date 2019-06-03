@@ -18,6 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/erroneas.css">
     <script src="./js/erroneas.js"></script>
@@ -59,13 +60,12 @@
             <button class="buttonSize btn">Limpiar</button>
         </div>
 
-        <div class="divContenedorErroneas">
+        <div ng-app="myApp" ng-controller="controllerMatriculasErroneas" class="divContenedorErroneas">
             <div class="divTablaErroneas">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
                             <th scope="col">Curso</th>
                             <th scope="col">Año</th>
                             <th scope="col">Motivo</th>
@@ -73,81 +73,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Felix</td>
-                            <td>del Rio Alvarez</td>
-                            <td>DAW</td>
-                            <td>1º AÑO</td>
-                            <td>Falta de documentacion</td>
-                            <td class="margen">
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px" title="Eliminar Registro"
-                                        alt="Eliminar Registro"></a>
+                        <tr ng-repeat="matricula in matriculasErroneas">
+                            <td>{{ matricula.nombre_completo.nombre 
+                                +" "+ matricula.nombre_completo.primer_apellido
+                                +" "+ matricula.nombre_completo.segundo_apellido }}
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Luis</td>
-                            <td>Barriga Carrasco</td>
-                            <td>DAW</td>
-                            <td>1º AÑO</td>
-                            <td>Datos incorrectos</td>
+                            <td>{{ matricula.ciclo_formativo.ciclo }}</td>
+                            <td>{{ matricula.ciclo_formativo.curso }}</td>
                             <td>
+                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
+                                        title="Asignar Registro" alt="Asignar Registro"></a>
                                 <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
                                         alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px" title="Eliminar Registro"
-                                        alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jairo</td>
-                            <td>Garcia</td>
-                            <td>DAW</td>
-                            <td>2º AÑO</td>
-                            <td>Falta de pago</td>
-                            <td>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px" title="Eliminar Registro"
-                                        alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alejandro</td>
-                            <td>Trebujena</td>
-                            <td>DAM</td>
-                            <td>2º AÑO</td>
-                            <td></td>
-                            <td>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px" title="Eliminar Registro"
-                                        alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alvaro</td>
-                            <td>Everis</td>
-                            <td>DAM</td>
-                            <td>2º AÑO</td>
-                            <td>Falta de documentacion</td>
-                            <td>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px" title="Eliminar Registro"
-                                        alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Rafael</td>
-                            <td>Marquez</td>
-                            <td>DAM</td>
-                            <td>1º AÑO</td>
-                            <td>Falta de documentacion</td>
-                            <td>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px" title="Eliminar Registro"
+                                <a ng-click="deleteRegistro($index, matricula._id)" href="#"><img src="./img/borrar.png"
+                                        class="parpadeo" width="40px" title="Eliminar Registro"
                                         alt="Eliminar Registro"></a>
                             </td>
                         </tr>

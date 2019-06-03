@@ -116,3 +116,76 @@ function buscador(valor, pos, HasscampoActual, noHassCampoActual, Hass1, noHassA
         }
     })
 }
+
+// Angular, peticion API
+var app = angular.module('myApp', []);
+app.controller('loadMatriculasPendientes', function ($scope, $http) {
+
+    /* Declaramos la url de la peticion */
+    const uri = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
+
+    /* Declaramos el $scope de la matricula que se visualiza al darle
+    al boton de "Ver registro" */
+    $scope.matriculaVer = [];
+
+    /* Declaramos el $scope para las pendientes */
+    $scope.matriculasPendientes = [];
+
+    /* Hacemos la peticion de todas las matriculas con el estado
+    Pendientes y la guardamos en el $scope de Pendientes */
+    $http.post(uri, {
+        estado: "pendiente"
+    }).then(function (response) {
+        var matriculas;
+        matriculas = response.data.matriculas
+        $scope.matriculasPendientes = matriculas
+        console.log($scope.matriculasPendientes);
+    }).catch(function (response) {
+        console.error('Error', response.status, response.data);
+    })
+
+
+
+    $scope.deleteRegistro = function (index, idMatricula) {
+        const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/"+idMatricula
+
+        /* Hacemos la peticion de todas las matriculas con el estado
+        Pendientes y la guardamos en el $scope de Pendientes */
+        $http.delete(uri)
+            .then(function (response) {
+                console.log(response.data)
+            }).catch(function (response) {
+                console.error('Error', response.status, response.data);
+            })
+
+        /* Borramos el registro del $scope local */
+        $scope.matriculasPendientes.splice(index, 1)
+    }
+    
+    $scope.verMatricula = function (index) {
+
+        /* Ocultamos la tabla y mostramos la vista de la matricula 
+        a ver */
+        $(".divTablaPendientes").hide()
+        $("#divMatriculaVer").show()
+
+        /* TAREA Comprobar que el registro es el asignado */
+
+        $scope.verValueNombre = $scope.matriculasPendientes[index].nombre_completo.nombre
+        $scope.verValuePrimerApellido = $scope.matriculasPendientes[index].nombre_completo.primer_apellido
+        $scope.verValueSegundoApellido = $scope.matriculasPendientes[index].nombre_completo.segundo_apellido
+
+    }
+    $scope.Volver = function () {
+
+        /* Ocultamos la tabla y mostramos la vista de la matricula 
+        a ver */
+        $(".divTablaPendientes").show()
+        $("#divMatriculaVer").hide()
+
+        $scope.verValueNombre = ""
+        $scope.verValuePrimerApellido = ""
+        $scope.verValueSegundoApellido = ""
+
+    }
+});

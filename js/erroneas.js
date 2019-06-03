@@ -119,3 +119,50 @@ function buscador(valor, pos, HasscampoActual, noHassCampoActual, Hass1, noHassA
         }
     })
 }
+
+// Angular, peticion API
+var app = angular.module('myApp', []);
+app.controller('controllerMatriculasErroneas', function ($scope, $http) {
+
+    /* Declaramos la url de la peticion */
+    const uri = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
+
+    /* Declaramos los $scopes para las pendientes y las erroneas */
+    $scope.matriculasErroneas = [];
+
+    /* Hacemos la peticion de todas las matriculas con el estado
+    Pendientes y la guardamos en el $scope de Pendientes */
+    $http.post(uri, {
+        estado: "erronea"
+    }).then(function (response) {
+        var matriculas;
+        matriculas = response.data.matriculas
+        $scope.matriculasErroneas = matriculas
+        console.log($scope.matriculasErroneas);
+    }).catch(function (response) {
+        console.error('Error', response.status, response.data);
+    })
+
+
+
+    $scope.deleteRegistro = function (index, idMatricula) {
+        const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/"+idMatricula
+
+        /* Hacemos la peticion de todas las matriculas con el estado
+        Pendientes y la guardamos en el $scope de Pendientes */
+        $http.delete(uri)
+            .then(function (response) {
+                console.log(response.data)
+            }).catch(function (response) {
+                console.error('Error', response.status, response.data);
+            })
+
+        /* Borramos el registro del $scope local */
+        $scope.matriculasErroneas.splice(index, 1)
+    }
+
+    $scope.verMatricula = function() {
+        $
+    }
+
+});

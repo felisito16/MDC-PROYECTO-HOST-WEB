@@ -51,7 +51,7 @@ body {
     vertical-align: middle;
 }
 
-.parpadeo {
+/* .parpadeo {
     animation-name: parpadeo;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -96,7 +96,7 @@ body {
     100% {
         opacity: 1.0;
     }
-}
+} */
 
 .registroPinchado {
     background: chocolate;
@@ -104,4 +104,56 @@ body {
 
 .registroHover {
     background: burlywood
+}
+
+.ml {
+    margin-right: 2%
+}
+
+#divInputVer {
+    display: -webkit-box;
+}
+
+
+/* Size de los inpus a seleccion */
+.inputSize10 {
+    width: 10%
+}
+
+.inputSize12-5 {
+    width: 12.5%
+}
+
+.inputSize15 {
+    width: 15%
+}
+
+.inputSize17-5 {
+    width: 17.5%
+}
+
+.inputSize20 {
+    width: 20%
+}
+
+.inputSize22-5 {
+    width: 22.5%
+}
+.inputSize25 {
+    width: 25%
+}
+.inputSize27-5 {
+    width: 27.5%
+}
+.inputSize30 {
+    width: 30%
+}
+.inputSize32-5 {
+    width: 32.5%
+}
+.inputSize35 {
+    width: 35%
+}
+.inputSize37-5 {
+    width: 37.5%
 }

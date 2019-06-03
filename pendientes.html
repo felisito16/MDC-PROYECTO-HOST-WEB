@@ -18,6 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/pendientes.css">
     <script src="./js/pendientes.js"></script>
@@ -59,34 +60,81 @@
             <button class="buttonSize btn">Limpiar</button>
         </div>
 
-        <div class="divContenedorPendientes">
+        <div ng-app="myApp" ng-controller="loadMatriculasPendientes" class="divContenedorPendientes">
+            <div style="display: none" id="divMatriculaVer">
+                <div id="divInputVer">
+                    <!-- 20 inputs -->
+                    <div class="ml inputSize22-5 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                        </div>
+                        <input type="text" class="form-control" ng-model="verValueNombre" aria-label="Default">
+                    </div>
+                    <div class="ml inputSize35 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Primer apellido</span>
+                        </div>
+                        <input type="text" class="form-control" ng-model="verValuePrimerApellido" aria-label="Default">
+                    </div>
+                    <div class="inputSize35 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Segundo apellido</span>
+                        </div>
+                        <input type="text" class="form-control" ng-model="verValueSegundoApellido" aria-label="Default">
+                    </div>
+                </div>
+                <div id="divInputVer">
+                    <div class="inputSize30 input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Fecha de nacimiento</span>
+                        </div>
+                        <input type="date" class="form-control" ng-model="verValueFechaNacimiento" aria-label="Default">
+                    </div>
+                </div>
+                <!-- <label>Nombre:</label>
+                <input type="text" ng-model="verValueNombre" class="sizeInput form-control" aria-label="Default"> -->
+                <!-- <label>Primer apellido:</label>
+                <input type="text" ng-model="verValuePrimerApellido" class="sizeInput form-control"
+                    aria-label="Default">
+                <label for="">Segundo Apellido:</label>
+                <input type="text" ng-model="verValueSegundoApellido" class="sizeInput form-control"
+                    aria-label="Default">
+                <label for="">Fecha de nacimiento:</label>
+                <input ng-model="verValueFechaNacimiento" type="date" class="sizeInput form-control"
+                    placeholder="dd/mm/aaaa"> -->
+                <div>
+                    <button ng-click="Volver()">Volver</button>
+                </div>
+            </div>
             <div class="divTablaPendientes">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
                             <th scope="col">Curso</th>
                             <th scope="col">Año</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Felix</td>
-                            <td>del Rio Alvarez</td>
-                            <td>DAW</td>
-                            <td>1º AÑO</td>
+                        <tr ng-repeat="matricula in matriculasPendientes">
+                            <td>{{ matricula.nombre_completo.nombre 
+                                +" "+ matricula.nombre_completo.primer_apellido
+                                +" "+ matricula.nombre_completo.segundo_apellido }}
+                            </td>
+                            <td>{{ matricula.ciclo_formativo.ciclo }}</td>
+                            <td>{{ matricula.ciclo_formativo.curso }}</td>
                             <td>
-                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
+                                <a href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
                                         title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
-                                        title="Eliminar Registro" alt="Eliminar Registro"></a>
+                                <a ng-click="verMatricula($index)" href=""><img src="./img/ver.png" class="parpadeo"
+                                        width="40px" title="Ver Registro" alt="Ver Registro"></a>
+                                <a ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
+                                        class="parpadeo" width="40px" title="Eliminar Registro"
+                                        alt="Eliminar Registro"></a>
                             </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>Luis</td>
                             <td>Barriga Carrasco</td>
                             <td>DAW</td>
@@ -155,7 +203,7 @@
                                 <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
                                         title="Eliminar Registro" alt="Eliminar Registro"></a>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>

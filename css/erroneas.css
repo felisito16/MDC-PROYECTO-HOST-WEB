@@ -51,7 +51,7 @@ body {
     vertical-align: middle;
 }
 
-.parpadeo {
+/* .parpadeo {
     animation-name: parpadeo;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -96,7 +96,7 @@ body {
     100% {
         opacity: 1.0;
     }
-}
+} */
 
 .registroPinchado {
     background: chocolate;
