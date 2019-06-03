@@ -18,10 +18,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/pendientes.css">
-    <script src="./js/pendientes.js"></script>
     <script src="./js/menu.js"></script>
 </head>
 
@@ -62,8 +64,167 @@
 
         <div ng-app="myApp" ng-controller="loadMatriculasPendientes" class="divContenedorPendientes">
             <div style="display: none" id="divMatriculaVer">
-                <div id="divInputVer">
-                    <!-- 20 inputs -->
+                <div class="row filaContenido">
+
+                    <!-- Contenedor Contenido Formulario -->
+                    <div class="container-fluid contenedorContenidoFormulario">
+
+                        <!-- Fila Formulario 1 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Nombre -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="nombre">Nombre:</label>
+                                <input ng-model="verValueNombre" type="text" class="form-control" id="nombre"
+                                    placeholder="Nombre">
+
+                            </div>
+
+                            <!-- Columna Primer Apellido -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="primerApellido">Primer Apellido:</label>
+                                <input ng-model="verValuePrimerApellido" type="text" class="form-control"
+                                    id="primerApellido" placeholder="Primer Apellido">
+
+                            </div>
+
+                            <!-- Columna Segundo Apellido -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="segundoApellido">Segundo Apellido:</label>
+                                <input ng-model="verValueSegundoApellido" type="text" class="form-control"
+                                    id="segundoApellido" placeholder="Segundo Apellido">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Fila Formulario 2 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Fecha Nacimiento -->
+                            <div class="col-xs-1 col-sm-6 col-md-3 form-group columnaFormulario">
+
+                                <label for="fechaNacimiento">Fecha Nacimiento:</label>
+                                <input ng-model="verValueFechaNacimiento" id="fechaNacimiento" class="form-control"
+                                    placeholder="Fecha Nacimiento">
+
+                            </div>
+
+                            <!-- Columna Tipo Documentacion -->
+                            <div class="col-xs-1 col-sm-6 col-md-3 form-group columnaFormulario">
+
+                                <label for="tipoDocumentacion">Tipo Documentacion:</label>
+                                <select ng-model="verValueTipoDocumentacion" class="form-control"
+                                    id="tipoDocumentacion">
+                                    <option hidden checked>Tipo Documentacion</option>
+                                    <option>NIF</option>
+                                    <option>NIE</option>
+                                </select>
+
+                            </div>
+
+                            <!-- Columna NIF/NIE -->
+                            <div class="col-xs-1 col-sm-6 col-md-3 form-group columnaFormulario">
+
+                                <label for="numDNI">NIF/NIE:</label>
+                                <input ng-model="verValueNumeroDocumentacion" type="text" class="form-control"
+                                    id="numDNI" placeholder="NIF/NIE">
+
+                            </div>
+
+                            <!-- Columna Nacionalidad -->
+                            <div class="col-xs-1 col-sm-2 col-md-3 form-group columnaFormulario">
+
+                                <label for="nacionalidad">Nacionalidad:</label>
+                                <input ng-model="verValueNacionalidad" type="text" class="form-control"
+                                    id="nacionalidad" placeholder="Nacionalidad">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Fila Formulario 3 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Provincia -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="provincia">Provincia:</label>
+                                <input ng-model="verValueProvincia" type="text" class="form-control" id="provincia"
+                                    placeholder="Provincia">
+
+                            </div>
+
+                            <!-- Columna Localidad -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="nombreLocalidad">Localidad:</label>
+                                <input ng-model="verValueLocalidad" type="text" class="form-control"
+                                    id="nombreLocalidad" placeholder="Localidad">
+
+                            </div>
+
+                            <!-- Columna Codigo Postal -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="cpLocalidad">Código Postal:</label>
+                                <input ng-model="verValueCodigoPostal" type="text" class="form-control" id="cpLocalidad"
+                                    placeholder="Código Postal">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Fila Formulario 4 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Nombre de la Via -->
+                            <div class="col-xs-1 col-sm-2 col-md-3 form-group columnaFormulario">
+
+                                <label for="calleDom">Calle:</label>
+                                <input ng-model="verValueCalleDomicilio" type="text" class="form-control" id="calleDom"
+                                    placeholder="calleDom">
+
+                            </div>
+
+
+                            <!-- Columna Numero -->
+                            <div class="col-xs-1 col-sm-2 col-md-2 form-group columnaFormulario">
+
+                                <label for="numeroDom">Número:</label>
+                                <input ng-model="verValueNumeroDomicilio" type="text" class="form-control"
+                                    id="numeroDom" placeholder="Nº">
+
+                            </div>
+
+                            <!-- Columna Telefono -->
+                            <div class="col-xs-1 col-sm-2 col-md-3 form-group columnaFormulario">
+
+                                <label for="telefono">Teléfono:</label>
+                                <input ng-model="verValueTelefono" type="text" class="form-control" id="telefono"
+                                    placeholder="Teléfono Fijo/Móvil">
+
+                            </div>
+
+                            <!-- Columna Correo Electronico -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="email">Correo Electrónico:</label>
+                                <input ng-model="verValueNumeroDomicilio" type="text" class="form-control" id="email"
+                                    placeholder="Correo Electrónico">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- <div id="divInputVer">
+                    20 inputs
                     <div class="ml inputSize22-5 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
@@ -90,7 +251,7 @@
                         </div>
                         <input type="date" class="form-control" ng-model="verValueFechaNacimiento" aria-label="Default">
                     </div>
-                </div>
+                </div> -->
                 <!-- <label>Nombre:</label>
                 <input type="text" ng-model="verValueNombre" class="sizeInput form-control" aria-label="Default"> -->
                 <!-- <label>Primer apellido:</label>
@@ -103,7 +264,8 @@
                 <input ng-model="verValueFechaNacimiento" type="date" class="sizeInput form-control"
                     placeholder="dd/mm/aaaa"> -->
                 <div>
-                    <button ng-click="Volver()">Volver</button>
+                    <button class="btn btn-outline-secondary" ng-click="Volver()">Volver</button>
+                    <button class="btn btn-success" ng-click="Volver()">Guardar</button>
                 </div>
             </div>
             <div class="divTablaPendientes">
@@ -134,76 +296,7 @@
                                         alt="Eliminar Registro"></a>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td>Luis</td>
-                            <td>Barriga Carrasco</td>
-                            <td>DAW</td>
-                            <td>1º AÑO</td>
-                            <td>
-                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
-                                        title="Eliminar Registro" alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jairo</td>
-                            <td>Garcia</td>
-                            <td>DAW</td>
-                            <td>2º AÑO</td>
-                            <td>
-                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
-                                        title="Eliminar Registro" alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alejandro</td>
-                            <td>Trebujena</td>
-                            <td>DAM</td>
-                            <td>2º AÑO</td>
-                            <td>
-                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
-                                        title="Eliminar Registro" alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alvaro</td>
-                            <td>Everis</td>
-                            <td>DAM</td>
-                            <td>2º AÑO</td>
-                            <td>
-                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
-                                        title="Eliminar Registro" alt="Eliminar Registro"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Rafael</td>
-                            <td>Marquez</td>
-                            <td>DAM</td>
-                            <td>1º AÑO</td>
-                            <td>
-                                <a href="#"><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a href="#"><img src="./img/ver.png" class="parpadeo" width="40px" title="Ver Registro"
-                                        alt="Ver Registro"></a>
-                                <a href="#"><img src="./img/borrar.png" class="parpadeo" width="40px"
-                                        title="Eliminar Registro" alt="Eliminar Registro"></a>
-                            </td>
-                        </tr> -->
+
                     </tbody>
                 </table>
             </div>
@@ -211,5 +304,8 @@
 
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="./js/pendientes.js"></script>
 
 </html>

@@ -3,6 +3,21 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
     window.location.href = "./login.html"
 }
 
+$("input[type=date]").datepicker(/* {
+    locale: 'es-es',
+    dateFormat: 'dd-mm-yyyy',
+    onSelect: function (dateText, inst) {
+        $(inst).val(dateText); // Write the value in the input
+    }
+} */);
+
+// Datepicker de Fecha de Nacimiento
+/* $('#fechaNacimiento').datepicker({
+    locale: 'es-es',
+    uiLibrary: 'bootstrap4',
+    format: 'dd/mm/yyyy'
+}); */
+
 $(window).on("load", function () {
 
     /* $("tbody tr").hide() */
@@ -144,24 +159,24 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
         console.error('Error', response.status, response.data);
     })
 
-
-
     $scope.deleteRegistro = function (index, idMatricula) {
-        const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/"+idMatricula
+        const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/" + idMatricula
 
         /* Hacemos la peticion de todas las matriculas con el estado
         Pendientes y la guardamos en el $scope de Pendientes */
-        $http.delete(uri)
-            .then(function (response) {
-                console.log(response.data)
-            }).catch(function (response) {
-                console.error('Error', response.status, response.data);
-            })
-
-        /* Borramos el registro del $scope local */
-        $scope.matriculasPendientes.splice(index, 1)
-    }
+        if(borrar) {
+            $http.delete(uri)
+                .then(function (response) {
+                    console.log(response.data)
+                }).catch(function (response) {
+                    console.error('Error', response.status, response.data);
+                })
     
+            /* Borramos el registro del $scope local */
+            $scope.matriculasPendientes.splice(index, 1)
+        }
+    }
+
     $scope.verMatricula = function (index) {
 
         /* Ocultamos la tabla y mostramos la vista de la matricula 
@@ -172,10 +187,32 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
         /* TAREA Comprobar que el registro es el asignado */
 
         $scope.verValueNombre = $scope.matriculasPendientes[index].nombre_completo.nombre
+
         $scope.verValuePrimerApellido = $scope.matriculasPendientes[index].nombre_completo.primer_apellido
+
         $scope.verValueSegundoApellido = $scope.matriculasPendientes[index].nombre_completo.segundo_apellido
 
+        var dia = $scope.matriculasPendientes[index].fecha_nacimiento.dia
+        var mes = $scope.matriculasPendientes[index].fecha_nacimiento.mes
+        var anio = $scope.matriculasPendientes[index].fecha_nacimiento.anio
+        var fechaNacimiento = dia + "/" + mes + "/" + anio
+        /* $scope.verValueFechaNacimiento = fechaNacimiento */
+
+        $scope.verValueTipoDocumentacion = $scope.matriculasPendientes[index].dni.tipo_documentacion
+        $scope.verValueNumeroDocumentacion = $scope.matriculasPendientes[index].dni.numero
+
+        $scope.verValueNacionalidad = $scope.matriculasPendientes[index].nacionalidad
+        $scope.verValueProvincia = $scope.matriculasPendientes[index].provincia
+        $scope.verValueLocalidad = $scope.matriculasPendientes[index].localidad.nombre
+        var codigoPostal = $scope.matriculasPendientes[index].localidad.codigo_postal
+        $scope.verValueCodigoPostal = codigoPostal
+        $scope.verValueCalleDomicilio = $scope.matriculasPendientes[index].domicilio.calle
+        $scope.verValueNumeroDomicilio = $scope.matriculasPendientes[index].domicilio.numero
+
+        $scope.verValueTelefono = $scope.matriculasPendientes[index].telefono
+        $scope.verValueNumeroDomicilio = $scope.matriculasPendientes[index].email
     }
+
     $scope.Volver = function () {
 
         /* Ocultamos la tabla y mostramos la vista de la matricula 
@@ -183,9 +220,14 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
         $(".divTablaPendientes").show()
         $("#divMatriculaVer").hide()
 
-        $scope.verValueNombre = ""
-        $scope.verValuePrimerApellido = ""
-        $scope.verValueSegundoApellido = ""
+    }
+
+    $scope.Guardar = function () {
+
+        /* Ocultamos la tabla y mostramos la vista de la matricula 
+        a ver */
+        $(".divTablaPendientes").show()
+        $("#divMatriculaVer").hide()
 
     }
 });

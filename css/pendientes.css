@@ -114,6 +114,19 @@ body {
     display: -webkit-box;
 }
 
+.filaFormulario{
+    height: 18%;
+    margin-top: 2.2vh;
+}
+
+.contenedorContenidoFormulario{
+    margin-top: 1vh;
+}
+
+.columnaFormulario label{
+    font-weight: bold;
+}
+
 
 /* Size de los inpus a seleccion */
 .inputSize10 {
