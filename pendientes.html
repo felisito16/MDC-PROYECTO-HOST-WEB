@@ -24,6 +24,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/pendientes.css">
+    <link rel="stylesheet" href="./css/animacionPendientes.css">
     <script src="./js/menu.js"></script>
 </head>
 
@@ -279,7 +280,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="matricula in matriculasPendientes">
+                        <tr class="animated fadeIn" ng-repeat="matricula in matriculasPendientes">
                             <td>{{ matricula.nombre_completo.nombre 
                                 +" "+ matricula.nombre_completo.primer_apellido
                                 +" "+ matricula.nombre_completo.segundo_apellido }}
