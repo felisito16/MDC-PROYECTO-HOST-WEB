@@ -162,7 +162,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
     $scope.deleteRegistro = function (index, idMatricula) {
         const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/" + idMatricula
 
-        var txt;
         var r = confirm("¿Desea borrar la matricula?");
         if (r == true) {
             /* Hacemos la peticion de todas las matriculas con el estado
@@ -178,7 +177,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
             $scope.matriculasPendientes.splice(index, 1)
         }
 
-
     }
 
     $scope.verMatricula = function (index) {
@@ -191,9 +189,7 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
         /* TAREA Comprobar que el registro es el asignado */
 
         $scope.verValueNombre = $scope.matriculasPendientes[index].nombre_completo.nombre
-
         $scope.verValuePrimerApellido = $scope.matriculasPendientes[index].nombre_completo.primer_apellido
-
         $scope.verValueSegundoApellido = $scope.matriculasPendientes[index].nombre_completo.segundo_apellido
 
         var dia = $scope.matriculasPendientes[index].fecha_nacimiento.dia
