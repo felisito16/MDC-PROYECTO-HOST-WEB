@@ -32,7 +32,7 @@
             <a class="nav-item aAumentado">Inicio</a>
             <a class="nav-item aAumentado">Pendientes</a>
             <a class="nav-item aAumentado">Erróneas</a>
-            <a class="nav-item aAumentado">En Trámite</a>
+            <a class="nav-item aAumentado">Finalizadas</a>
             <a class="nav-item aAumentado">Ayuda</a>
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
@@ -88,6 +88,13 @@
                                 <a ng-click="deleteRegistro($index, matricula._id)" href="#"><img src="./img/borrar.png"
                                         class="parpadeo" width="40px" title="Eliminar Registro"
                                         alt="Eliminar Registro"></a>
+                            </td>
+                            <td>
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected>Estado...</option>
+                                    <option value="erronea">Erronea</option>
+                                    <option value="finalizada">Finalizada</option>
+                                </select>
                             </td>
                         </tr>
                     </tbody>

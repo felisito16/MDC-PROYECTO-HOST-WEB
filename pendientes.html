@@ -35,7 +35,7 @@
             <a class="nav-item aAumentado">Inicio</a>
             <a class="nav-item aAumentado">Pendientes</a>
             <a class="nav-item aAumentado">Erróneas</a>
-            <a class="nav-item aAumentado">En Trámite</a>
+            <a class="nav-item aAumentado">Finalizadas</a>
             <a class="nav-item aAumentado">Ayuda</a>
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
@@ -218,52 +218,9 @@
                                     placeholder="Correo Electrónico">
 
                             </div>
-
                         </div>
-
-                    </div>
-
-                </div>
-                <!-- <div id="divInputVer">
-                    20 inputs
-                    <div class="ml inputSize22-5 input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
-                        </div>
-                        <input type="text" class="form-control" ng-model="verValueNombre" aria-label="Default">
-                    </div>
-                    <div class="ml inputSize35 input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Primer apellido</span>
-                        </div>
-                        <input type="text" class="form-control" ng-model="verValuePrimerApellido" aria-label="Default">
-                    </div>
-                    <div class="inputSize35 input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Segundo apellido</span>
-                        </div>
-                        <input type="text" class="form-control" ng-model="verValueSegundoApellido" aria-label="Default">
                     </div>
                 </div>
-                <div id="divInputVer">
-                    <div class="inputSize30 input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Fecha de nacimiento</span>
-                        </div>
-                        <input type="date" class="form-control" ng-model="verValueFechaNacimiento" aria-label="Default">
-                    </div>
-                </div> -->
-                <!-- <label>Nombre:</label>
-                <input type="text" ng-model="verValueNombre" class="sizeInput form-control" aria-label="Default"> -->
-                <!-- <label>Primer apellido:</label>
-                <input type="text" ng-model="verValuePrimerApellido" class="sizeInput form-control"
-                    aria-label="Default">
-                <label for="">Segundo Apellido:</label>
-                <input type="text" ng-model="verValueSegundoApellido" class="sizeInput form-control"
-                    aria-label="Default">
-                <label for="">Fecha de nacimiento:</label>
-                <input ng-model="verValueFechaNacimiento" type="date" class="sizeInput form-control"
-                    placeholder="dd/mm/aaaa"> -->
                 <div>
                     <button class="btn btn-outline-secondary" ng-click="Volver()">Volver</button>
                     <button class="btn btn-success" ng-click="Volver()">Guardar</button>
@@ -290,11 +247,18 @@
                             <td>
                                 <a href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
                                         title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a ng-click="verMatricula($index)" href=""><img src="./img/ver.png" class="parpadeo"
+                                <a ng-click="verMatricula($index)" href=""><img src="./img/editar.png" class="parpadeo"
                                         width="40px" title="Ver Registro" alt="Ver Registro"></a>
                                 <a ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
                                         class="parpadeo" width="40px" title="Eliminar Registro"
                                         alt="Eliminar Registro"></a>
+                            </td>
+                            <td>
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected>Estado...</option>
+                                    <option value="erronea">Erronea</option>
+                                    <option value="finalizada">Finalizada</option>
+                                </select>
                             </td>
                         </tr>
 

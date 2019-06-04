@@ -4,7 +4,7 @@ $(window).on("load", function () {
     $("nav a:contains('Inicio')").click(() => { go('./inicio.html') })
     $("nav a:contains('Pendientes')").click(() => { go('./pendientes.html') })
     $("nav a:contains('Erróneas')").click(() => { go('./erroneas.html') })
-    $("nav a:contains('Trámite')").click(() => { go('./tramite.html') })
+    $("nav a:contains('Finalizas')").click(() => { go('./Finalizada.html') })
     $("nav a:contains('Ayuda')").click(() => { go('./ayuda.html') })
     $("nav a:contains('Cerrar')").click(() => {
         localStorage.removeItem("abreteSesamo")
