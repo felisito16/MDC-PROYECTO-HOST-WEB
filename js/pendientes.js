@@ -3,21 +3,6 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
     window.location.href = "./login.html"
 }
 
-$("input[type=date]").datepicker(/* {
-    locale: 'es-es',
-    dateFormat: 'dd-mm-yyyy',
-    onSelect: function (dateText, inst) {
-        $(inst).val(dateText); // Write the value in the input
-    }
-} */);
-
-// Datepicker de Fecha de Nacimiento
-/* $('#fechaNacimiento').datepicker({
-    locale: 'es-es',
-    uiLibrary: 'bootstrap4',
-    format: 'dd/mm/yyyy'
-}); */
-
 $(window).on("load", function () {
 
     /* $("tbody tr").hide() */
@@ -176,7 +161,24 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
             /* Borramos el registro del $scope local */
             $scope.matriculasPendientes.splice(index, 1)
         }
+    }
+    $scope.cambiarEstadoErronea = function (index) {
+        const uri = "https://proyecto-mdc-api.herokuapp.com/cambiarEstadoMatricula/"
 
+        var r = confirm("¿Desea cambiar el estado de la matricula a Erronea?");
+        if (r == true) {
+            /* Hacemos la peticion de todas las matriculas con el estado
+            Pendientes y la guardamos en el $scope de Pendientes */
+            $http.post(uri)
+                .then(function (response) {
+                    console.log(response.data)
+                }).catch(function (response) {
+                    console.error('Error', response.status, response.data);
+                })
+
+            /* Borramos el registro del $scope local */
+            $scope.matriculasPendientes.splice(index, 1)
+        }
     }
 
     $scope.verMatricula = function (index) {

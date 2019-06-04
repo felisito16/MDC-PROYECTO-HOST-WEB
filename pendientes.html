@@ -244,7 +244,7 @@
                             </td>
                             <td>{{ matricula.ciclo_formativo.ciclo }}</td>
                             <td>{{ matricula.ciclo_formativo.curso }}</td>
-                            <td>
+                            <td class="tdAccion">
                                 <a href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
                                         title="Asignar Registro" alt="Asignar Registro"></a>
                                 <a ng-click="verMatricula($index)" href=""><img src="./img/editar.png" class="parpadeo"
@@ -252,16 +252,16 @@
                                 <a ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
                                         class="parpadeo" width="40px" title="Eliminar Registro"
                                         alt="Eliminar Registro"></a>
-                            </td>
-                            <td>
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected>Estado...</option>
-                                    <option value="erronea">Erronea</option>
-                                    <option value="finalizada">Finalizada</option>
+
+                                <select class="custom-select">
+                                    <option selected hidden>Estado</option>
+                                    <option ng-click="cambiarEstadoErronea($index)" value="Erronea">
+                                        Erronea</option>
+                                    <option ng-click="cambiarEstadoFinalizada($index)" value="Finalizada"> Finalizada
+                                    </option>
                                 </select>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>

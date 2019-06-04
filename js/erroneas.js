@@ -162,7 +162,7 @@ app.controller('controllerMatriculasErroneas', function ($scope, $http) {
     }
 
     $scope.verMatricula = function() {
-        $
+        //
     }
 
 });

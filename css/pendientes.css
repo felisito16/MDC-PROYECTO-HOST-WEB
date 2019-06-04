@@ -51,53 +51,6 @@ body {
     vertical-align: middle;
 }
 
-/* .parpadeo {
-    animation-name: parpadeo;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    -webkit-animation-name: parpadeo;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-}
-
-@-moz-keyframes parpadeo {
-    0% {
-        opacity: 1.0;
-    }
-    50% {
-        opacity: 0.75;
-    }
-    100% {
-        opacity: 1.0;
-    }
-}
-
-@-webkit-keyframes parpadeo {
-    0% {
-        opacity: 1.0;
-    }
-    50% {
-        opacity: 0.75;
-    }
-    100% {
-        opacity: 1.0;
-    }
-}
-
-@keyframes parpadeo {
-    0% {
-        opacity: 1.0;
-    }
-    50% {
-        opacity: 0.75;
-    }
-    100% {
-        opacity: 1.0;
-    }
-} */
-
 .registroPinchado {
     background: chocolate;
 }
@@ -114,21 +67,21 @@ body {
     display: -webkit-box;
 }
 
-.filaFormulario{
+.filaFormulario {
     height: 18%;
     margin-top: 2.2vh;
 }
 
-.contenedorContenidoFormulario{
+.contenedorContenidoFormulario {
     margin-top: 1vh;
 }
 
-.columnaFormulario label{
+.columnaFormulario label {
     font-weight: bold;
 }
 
-
 /* Size de los inpus a seleccion */
+
 .inputSize10 {
     width: 10%
 }
@@ -152,22 +105,35 @@ body {
 .inputSize22-5 {
     width: 22.5%
 }
+
 .inputSize25 {
     width: 25%
 }
+
 .inputSize27-5 {
     width: 27.5%
 }
+
 .inputSize30 {
     width: 30%
 }
+
 .inputSize32-5 {
     width: 32.5%
 }
+
 .inputSize35 {
     width: 35%
 }
+
 .inputSize37-5 {
     width: 37.5%
 }
 
+.tdAccion {
+    width: 288px;
+}
+
+.custom-select {
+    width: 130px;
+}
