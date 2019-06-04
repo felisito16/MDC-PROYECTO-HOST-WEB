@@ -214,7 +214,7 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
         $scope.verValueNumeroDomicilio = $scope.matriculasPendientes[index].domicilio.numero
 
         $scope.verValueTelefono = $scope.matriculasPendientes[index].telefono
-        $scope.verValueNumeroDomicilio = $scope.matriculasPendientes[index].email
+        $scope.verValueEmail = $scope.matriculasPendientes[index].email
     }
 
     $scope.Volver = function () {
