@@ -33,60 +33,54 @@ $(window).on("load", function () {
         $(this).removeClass("registroHover").addClass("registroPinchado")
     })
 
-    // Evento Boton de Busqueda avanzada
-    $("button:eq(0)").click(function () {
+    // // Evento Boton de Busqueda avanzada
+    // $("button:eq(0)").click(function () {
 
-    })
+    // })
 
-    // Evento Boton de Buscar todo
-    $("button:eq(1)").click(function () {
-        $(".divContenedorPendientes").show()
-    })
+    // // Evento Boton de Buscar todo
+    // $("button:eq(1)").click(function () {
+    //     $(".divContenedorPendientes").show()
+    // })
 
     // Evento Boton Limpiar
-    $("button:eq(2)").click(function () {
-        $("input").val("")
-        $("select:eq(0)").val("Grado")
-        $("select:eq(1)").val("Año curso")
-        $("tbody tr").each(function () {
-            $(this).show()
-            $("tbody tr.registroPinchado").removeClass("registroPinchado")
-        })
+    $(".botonLimpiar").click(function () {
+        $("#buscador").val("")
     })
 
-    // Buscador Avanzado (NO TOCAR) Funciona 06/05/2019 !!
+    // // Buscador Avanzado (NO TOCAR) Funciona 06/05/2019 !!
 
-    // Nombre v3
-    $("input:eq(0)").on("keyup", function () {
-        var valor = $(this).val()
-        buscador(valor, 1, "mostrarNombre", "NoMostrarNombre", "mostrarApellido",
-            "NoMostrarApellido", "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarGrado", "NoMostrarGrado")
-    })
+    // // Nombre v3
+    // $("input:eq(0)").on("keyup", function () {
+    //     var valor = $(this).val()
+    //     buscador(valor, 1, "mostrarNombre", "NoMostrarNombre", "mostrarApellido",
+    //         "NoMostrarApellido", "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarGrado", "NoMostrarGrado")
+    // })
 
-    // Apellido v3
-    $("input:eq(1)").on("keyup", function () {
-        var valor = $(this).val()
-        buscador(valor, 2, "mostrarApellido", "NoMostrarApellido", "mostrarAnioCurso",
-            "NoMostrarAnioCurso", "mostrarNombre", "NoMostrarNombre", "mostrarGrado", "NoMostrarGrado")
-    })
+    // // Apellido v3
+    // $("input:eq(1)").on("keyup", function () {
+    //     var valor = $(this).val()
+    //     buscador(valor, 2, "mostrarApellido", "NoMostrarApellido", "mostrarAnioCurso",
+    //         "NoMostrarAnioCurso", "mostrarNombre", "NoMostrarNombre", "mostrarGrado", "NoMostrarGrado")
+    // })
 
-    // Grado v3
-    $("select:eq(0)").on("change", function () {
-        var valor = $("select:eq(0) option:selected").val()
-        if (valor != "Grado") {
-            buscador(valor, 3, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
-                "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
-        }
-    })
+    // // Grado v3
+    // $("select:eq(0)").on("change", function () {
+    //     var valor = $("select:eq(0) option:selected").val()
+    //     if (valor != "Grado") {
+    //         buscador(valor, 3, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
+    //             "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
+    //     }
+    // })
 
-    // Año Curso v3
-    $("select:eq(1)").on("change", function () {
-        var valor = $("select:eq(1) option:selected").val()
-        if (valor != "Año Curso") {
-            buscador(valor, 4, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
-                "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
-        }
-    })
+    // // Año Curso v3
+    // $("select:eq(1)").on("change", function () {
+    //     var valor = $("select:eq(1) option:selected").val()
+    //     if (valor != "Año Curso") {
+    //         buscador(valor, 4, "mostrarAnioCurso", "NoMostrarAnioCurso", "mostrarNombre",
+    //             "NoMostrarNombre", "mostrarApellido", "NoMostrarApellido", "mostrarGrado", "NoMostrarGrado")
+    //     }
+    // })
 })
 
 // FUNCION Buscador / Filtro muticampo
@@ -233,3 +227,12 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
 
     }
 });
+
+$(document).ready(function(){
+    $("#buscador").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $(".table tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
