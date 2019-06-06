@@ -24,14 +24,18 @@
 <body>
     <div ng-app="angular" ng-controller="controller" class="divContenedor">
         <div class="divh1">
-            <h1>Administracion de matriculas</h1>
+            <h1 class="mt-3 mb-4 text-center" id="titleLogin-xs">MDC</h1>
+            <h1 class="mt-3 mb-4 text-center" id="titleLogin-lg">Matriculacion de ciclos</h1>
         </div>
         <div class="divInput">
-            <input ng-model="inUser" name="user" class="inputSize inputUsuario form-control" type="text" placeholder="Usuario">
-            <input ng-model="inPass" name="pass" class="inputSize form-control" type="password" placeholder="Contraseña">
+            <input ng-disabled="estadoLoad" ng-model="inUser" name="user" class="inputSize inputUsuario form-control"
+                type="text" placeholder="Usuario">
+            <input ng-disabled="estadoLoad" ng-model="inPass" name="pass" class="inputSize form-control" type="password"
+                placeholder="Contraseña">
         </div>
         <div class="divButton">
-            <button ng-click="iniciarSesion()" class="buttonSize btn btn-success" id="buttonLogin">
+            <button ng-click="iniciarSesion()" ng-style="definePadding(estadoLoad)" class="buttonSize btn btn-success"
+                id="buttonLogin">
                 <img ng-if="estadoLoad == true" id="loadGif" src="./img/load2.gif" width="40px" alt="">
                 <span ng-if="estadoLoad == false">
                     INICIAR SESION

@@ -1,102 +1,36 @@
-
-
-
-// Cuando se cargue la ventana/pagina completamente
-
-/* $(document).ready(function () {
-
-    // Funcionalidad con la API
-    $("button:eq(0)").click(() => { IniciarSesion() })
-    $("input").focus(function () {
-        $(this).keydown(function (e) {
-            if (e.key == "Enter") {
-                IniciarSesion()
-            }
-        })
-    })
-}); */
-
-// Funcion Boton INICIAR SESION
-
-/* function IniciarSesion() {
-    if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
-
-        let inUser = $("input:eq(0)").val()
-        let inPass = $("input:eq(1)").val()
-
-        console.log(inUser)
-        console.log(inPass)
-
-        var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
-        console.log("URI: " + uri)
-
-        $(".divContenedor div").not(":eq(0)").each((function (index) {
-            $(this).hide()
-        }))
-        $("#load").show().css({
-            "display": "block",
-            "margin-left": "auto",
-            "margin-right": "auto"
-        })
-
-        $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res) {
-            console.log(res.usuario)
-            if (res.usuario) {
-                if (res.usuario[0].user && res.usuario[0].pass) {
-                    if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
-                        localStorage.setItem("abreteSesamo", res.usuario[0]._id);
-                        location.href = "inicio.html";
-                    } else {
-                        $(".divContenedor div").not(":eq(0)").each((function (index) {
-                            $(this).show()
-                        }))
-                        $("#load").hide()
-                        alert("Introduce un usuario y contraseña validos");
-                    }
-                } else {
-                    $(".divContenedor div").not(":eq(0)").each((function (index) {
-                        $(this).show()
-                    }))
-                    $("#load").hide()
-                    alert("Introduce un usuario y contraseña validos");
-                }
-            } else {
-                $(".divContenedor div").not(":eq(0)").each((function (index) {
-                    $(this).show()
-                }))
-                $("#load").hide()
-                alert("Introduce un usuario y contraseña validos");
-            }
-        })
-    } else {
-        alert("Inserte todos los campos");
-    }
-} */
-
-
-// Funcion SHA512
-//code of SHA512 function
-
-
+/* Carga del modulo de Angular, y del controlador */
 var app = angular.module('angular', []);
 app.controller('controller', function ($scope, $http) {
 
+    /* Declaramos la variable con la que sabremos cuando hemos
+    dado clic en Iniciar sesion, para mostrar/ocultar elementos
+    del HTML */
     $scope.estadoLoad = false
-    /* Volver a dejar como estaba */
-    /*     $timeout(function () {
-    
-        }, 2000); */
 
+    /* Funcion a la que le pasamos la variable anterior, y segun
+    el estado, definiremos el padding de una manera o de otra */
+    $scope.definePadding = function (estado) {
+        if (estado == true) {
+            return { "padding": 0 };
+        } else {
+            return { "padding": "" };
+        }
+    }
+
+    /* Funcion de inicio de sesion, al hacer clic en el boton 
+    iniciaremos el proceso de validacion de datos */
     $scope.iniciarSesion = function () {
+
+        /* Marcamos que estamos en un estado de carga de datos */
         $scope.estadoLoad = true
+
+        /* Cogemos los valores de los inputs de Usuario y 
+        Contraseña */
         var inUser = $scope.inUser
         var inPass = $scope.inPass
+
+        /* Definimos url de la peticion a la API */
         const uri = "https://proyecto-mdc-api.herokuapp.com/validar"
-
-        /* varible de estado del gif de loading */
-
-        /* Funcion de carga del gif y la peticion */
-        $("#buttonLogin").css({ "padding": 0 })
 
         /* Hacemos la peticion de todas las matriculas con el estado
         Pendientes y la guardamos en el $scope de Pendientes */
@@ -105,19 +39,26 @@ app.controller('controller', function ($scope, $http) {
             pass: SHA512(inPass)
         }).then(function (response) {
             console.log(response.data)
-            localStorage.setItem("abreteSesamo", res.usuario[0]._id);
-            location.href = "inicio.html";
+            /* Al recibir los datos, preguntamos si existe un usuario con
+            esas credenciales exactas, si existe creamos token y vamos a 
+            inicio.html; Sino, mostramos alerta */
+            if (response.data.usuario) {
+                localStorage.setItem("abreteSesamo", response.data.usuario._id);
+                location.href = "inicio.html";
+            } else {
+                alert("Usuario y/o contraseña incorrectas")
+                $scope.estadoLoad = false
+            }
+            /* Independientemente del resultado, volvemos a ocultar el gif
+            de carga y los dejamos por defecto */
+
         }).catch(function (response) {
             console.error('Error', response.status, response.data);
         })
 
-        $("#buttonLogin").css({ "padding": "" });
-
-        $scope.estadoLoad = false
-        /* Borramos el registro del $scope local */
-
     }
 
+    /* Funcion de conversion de la password a SHA512 */
     function SHA512(str) {
 
         function int64(msint_32, lsint_32) {

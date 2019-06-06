@@ -143,8 +143,7 @@ app.controller('controllerMatriculasErroneas', function ($scope, $http) {
         console.error('Error', response.status, response.data);
     })
 
-
-
+    
     $scope.deleteRegistro = function (index, idMatricula) {
         const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/"+idMatricula
 

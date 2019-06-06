@@ -3,24 +3,19 @@
 $(document).ready(function () {
 
     // Funcionalidad con la API
-    $("button:eq(0)").click(() => { Registrarse() })
+    $("button:eq(0)").click(() => { IniciarSesion() })
     $("input").focus(function () {
         $(this).keydown(function (e) {
             if (e.key == "Enter") {
-                Registrarse()
+                IniciarSesion()
             }
         })
     })
-
-    $("button:eq(1)").click(function () {
-        window.location.href = './login.html';
-    })
-
 });
 
-// Funcion Boton SIGN UP
+// Funcion Boton INICIAR SESION
 
-function Registrarse() {
+function IniciarSesion() {
     if (($("input:eq(0)").val() != "") && ($("input:eq(1)").val() != "")) {
 
         let inUser = $("input:eq(0)").val()
@@ -29,10 +24,12 @@ function Registrarse() {
         console.log(inUser)
         console.log(inPass)
 
-        var uri = "https://proyecto-mdc-api.herokuapp.com/save";
+        var uri = "https://proyecto-mdc-api.herokuapp.com/validar";
         console.log("URI: " + uri)
 
-        $("button").hide()
+        $(".divContenedor div").not(":eq(0)").each((function (index) {
+            $(this).hide()
+        }))
         $("#load").show().css({
             "display": "block",
             "margin-left": "auto",
@@ -42,29 +39,28 @@ function Registrarse() {
         $.post(uri, { user: inUser, pass: SHA512(inPass) }, function (res) {
             console.log(res.usuario)
             if (res.usuario) {
-                if (res.usuario.user && res.usuario.pass) {
-                    if (res.usuario.user == document.querySelectorAll("input")[0].value) {
-                        $("button:eq(0)").show()
-                        $("#load").hide()
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Cuenta creada!',
-                            showConfirmButton: false,
-                            timer: 1800,
-                        })
-                        setTimeout(function () { location.href = "inicio.html"; }, 2100);
+                if (res.usuario[0].user && res.usuario[0].pass) {
+                    if (res.usuario[0].user == document.querySelectorAll("input")[0].value) {
+                        localStorage.setItem("abreteSesamo", res.usuario[0]._id);
+                        location.href = "inicio.html";
                     } else {
-                        $("button:eq(0)").show()
+                        $(".divContenedor div").not(":eq(0)").each((function (index) {
+                            $(this).show()
+                        }))
                         $("#load").hide()
                         alert("Introduce un usuario y contraseña validos");
                     }
                 } else {
-                    $("button:eq(0)").show()
+                    $(".divContenedor div").not(":eq(0)").each((function (index) {
+                        $(this).show()
+                    }))
                     $("#load").hide()
                     alert("Introduce un usuario y contraseña validos");
                 }
             } else {
-                $("button:eq(0)").show()
+                $(".divContenedor div").not(":eq(0)").each((function (index) {
+                    $(this).show()
+                }))
                 $("#load").hide()
                 alert("Introduce un usuario y contraseña validos");
             }
@@ -73,11 +69,6 @@ function Registrarse() {
         alert("Inserte todos los campos");
     }
 }
-
-
-
-// Funcion SHA512
-//code of SHA512 function
 function SHA512(str) {
 
     function int64(msint_32, lsint_32) {

@@ -102,7 +102,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
             $scope.matriculasPendientes.splice(index, 1)
         }
     }
-
     $scope.verMatricula = function (index) {
 
         /* Ocultamos la tabla y mostramos la vista de la matricula 
