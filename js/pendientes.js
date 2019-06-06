@@ -40,22 +40,41 @@ $(window).on("load", function () {
 })
 
 // Angular, peticion API
-var app = angular.module('myApp', []);
-app.controller('loadMatriculasPendientes', function ($scope, $http) {
+var app = angular.module('myApp', ['ngStorage']);
+app.controller('loadMatriculasPendientes', function ($scope, $ngStorage, $http) {
 
     /* Declaramos la url de la peticion */
-    const uri = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
+    const uriCargar = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
+    const uriAsignada = "https://proyecto-mdc-api.herokuapp.com/matriculaAsignada/" + localStorage.getItem("abreteSesamo")
 
+    $scope.
+
+    $scope.IHAVETHEPOWER_ornot = function() {
+        angular.forEach($scope.matriculasPendientes, function(value, key) {
+            this.push(key + ': ' + value);
+          }, log);
+    };
     /* Declaramos el $scope de la matricula que se visualiza al darle
     al boton de "Ver registro" */
     $scope.matriculaVer = [];
+    $scope.matsAsignadas = []
 
     /* Declaramos el $scope para las pendientes */
     $scope.matriculasPendientes = [];
 
     /* Hacemos la peticion de todas las matriculas con el estado
     Pendientes y la guardamos en el $scope de Pendientes */
-    $http.post(uri, {
+    $http.get(uriAsignada
+    ).then(function (response) {
+        var matriculasAsignadas;
+        matriculasAsignadas = response.data.matricula
+        $scope.matsAsignadas = matriculasAsignadas
+        console.log($scope.matsAsignadas);
+    }).catch(function (response) {
+        console.error('Error', response.status, response.data);
+    })
+
+    $http.post(uriCargar, {
         estado: "pendiente"
     }).then(function (response) {
         var matriculas;
@@ -149,7 +168,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $http) {
         a ver */
         $(".divTablaPendientes").show()
         $("#divMatriculaVer").hide()
-
     }
 
     /* Funcion de seleccion de las acciones de la lista */
