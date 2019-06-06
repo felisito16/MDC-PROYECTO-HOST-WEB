@@ -52,6 +52,11 @@ body {
     width: 350px;
 }
 
+/* Load */
+#loadGif {
+    width: 36px;
+}
+
 a:hover {text-decoration: none;color: teal;}
 a {color: darkgreen}
 

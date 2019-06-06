@@ -16,21 +16,27 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="./css/loginFelix.css">
     <script src="./js/login.js"></script>
 </head>
 
 <body>
-    <div class="divContenedor">
+    <div ng-app="angular" ng-controller="controller" class="divContenedor">
         <div class="divh1">
             <h1>Administracion de matriculas</h1>
         </div>
         <div class="divInput">
-            <input name="user" class="inputSize inputUsuario form-control" type="text" placeholder="Usuario">
-            <input name="pass" class="inputSize form-control" type="password" placeholder="Contraseña">
+            <input ng-model="inUser" name="user" class="inputSize inputUsuario form-control" type="text" placeholder="Usuario">
+            <input ng-model="inPass" name="pass" class="inputSize form-control" type="password" placeholder="Contraseña">
         </div>
         <div class="divButton">
-            <button class="buttonSize btn btn-success">INICIAR SESIÓN</button>
+            <button ng-click="iniciarSesion()" class="buttonSize btn btn-success" id="buttonLogin">
+                <img ng-if="estadoLoad == true" id="loadGif" src="./img/load2.gif" width="40px" alt="">
+                <span ng-if="estadoLoad == false">
+                    INICIAR SESION
+                </span>
+            </button>
         </div>
         <div class="divPassOlvidada">
             <p>
@@ -44,7 +50,6 @@
             </p>
         </div>
     </div>
-    <img style="display: none" id="load" src="./img/loading.gif">
 </body>
 <script>
 </script>
