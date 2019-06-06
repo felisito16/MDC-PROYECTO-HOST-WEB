@@ -47,7 +47,7 @@ app.controller('loadMatriculasPendientes', function ($scope, $ngStorage, $http) 
     const uriCargar = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
     const uriAsignada = "https://proyecto-mdc-api.herokuapp.com/matriculaAsignada/" + localStorage.getItem("abreteSesamo")
 
-    $scope.
+    $scope.indexPower = [];
 
     $scope.IHAVETHEPOWER_ornot = function() {
         angular.forEach($scope.matriculasPendientes, function(value, key) {
