@@ -43,10 +43,11 @@ $(window).on("load", function () {
 var app = angular.module('myApp', ['ngStorage']);
 app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $http) {
 
-    /* Declaramos la url de la peticion */
+    /* Declaramos la url de la peticion de cargas de Matriculas */
     const uriCargar = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
     const uriAsignada = "https://proyecto-mdc-api.herokuapp.com/matriculaAsignada/" + localStorage.getItem("abreteSesamo")
 
+    /* Guardamos el id del usuario logeado */
     $scope.idUsuarioSesion = localStorage.getItem('abreteSesamo')
 
     /* $scope.IHAVETHEPOWER_ornot = function() { */
@@ -78,31 +79,38 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         matriculas = response.data.matriculas
         $scope.matriculasPendientes = matriculas
 
+        /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
+        encuentran */
         angular.forEach($scope.matriculasPendientes, function (value, key) {
 
+            /* Asigamos niveles */
+
+            /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
+            es una matricula nueva */
             if (value.idUsuarioAsignado == "" || value.idUsuarioAsignado == undefined) {
                 $scope.matriculasPendientes[key]['asignada'] = 'nueva'
+
+                /* Si el valor es igual al id del usuario logeado es una matricula
+                que tiene asignada */
             } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
                 $scope.matriculasPendientes[key]['asignada'] = 'propia'
+
+                /* Entonces lo unico que queda darle el nivel de que esta asignada
+                a otro usuario del sistema diferente */
             } else {
                 $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
             }
 
-            /* console.log($scope.idUsuarioSesion);
-            console.log("ID local key: " + key);
-            console.log("DATA value: " + value);
-            console.log("value Nombre : " + value.idUsuarioAsignado);
-            console.log("---------------"); */
-            // Registrostablas
-            // Evento Hover registros
-
         });
 
+        /* Matriculas */
         console.log($scope.matriculasPendientes);
+
     }).catch(function (response) {
         console.error('Error', response.status, response.data);
     })
 
+    /* Funcion de borrar registro */
     $scope.deleteRegistro = function (index, idMatricula) {
         const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/" + idMatricula
 
@@ -121,6 +129,8 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
             $scope.matriculasPendientes.splice(index, 1)
         }
     }
+
+    /* Funcion DEPRECTAED */
     $scope.cambiarEstadoErronea = function (index) {
         const uri = "https://proyecto-mdc-api.herokuapp.com/cambiarEstadoMatricula/"
 
@@ -139,6 +149,9 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
             $scope.matriculasPendientes.splice(index, 1)
         }
     }
+
+    /* Funcion que asigna los valores a los input al darle al boton ver
+    / editar */
     $scope.verMatricula = function (index) {
 
         /* Ocultamos la tabla y mostramos la vista de la matricula 
