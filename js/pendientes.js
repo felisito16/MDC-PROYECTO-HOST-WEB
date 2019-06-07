@@ -93,7 +93,11 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
             console.log("DATA value: " + value);
             console.log("value Nombre : " + value.idUsuarioAsignado);
             console.log("---------------"); */
+            // Registrostablas
+            // Evento Hover registros
+
         });
+
         console.log($scope.matriculasPendientes);
     }).catch(function (response) {
         console.error('Error', response.status, response.data);

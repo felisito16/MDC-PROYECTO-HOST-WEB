@@ -209,19 +209,19 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Año</th>
+                            <th id="thCurso" scope="col">Curso</th>
+                            <th id="thAnio" scope="col">Año</th>
                             <th class="text-center"><input type="search" id="buscador" placeholder="Buscador"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="animated fadeIn" ng-repeat="matricula in matriculasPendientes">
+                        <tr class="animated fadeIn registroHover" ng-repeat="matricula in matriculasPendientes">
                             <td>{{ matricula.nombre_completo.nombre 
                                 +" "+ matricula.nombre_completo.primer_apellido
                                 +" "+ matricula.nombre_completo.segundo_apellido }}
                             </td>
-                            <td>{{ matricula.ciclo_formativo.ciclo }}</td>
-                            <td>{{ matricula.ciclo_formativo.curso }}</td>
+                            <td class="tdCurso">{{ matricula.ciclo_formativo.ciclo }}</td>
+                            <td class="tdAnio">{{ matricula.ciclo_formativo.curso }}</td>
                             <td class="tdAccion">
                                 <!-- Asignar
                                 * Solo pueden ver este boton las matriculas nuevas -->
@@ -249,7 +249,9 @@
                                         class="parpadeo" width="40px" title="Eliminar Registro"
                                         alt="Eliminar Registro"></a>
 
-                                <select class="custom-select" ng-model="selectedItem"
+                                <!-- Select de opciones de cambiar la matricula de estado 
+                                * -->
+                                <select id="selectAccionRegistro" class="custom-select" ng-model="selectedItem"
                                     ng-change="selectedItemChanged($index)">
                                     <option selected hidden value="">Opciones</option>
                                     <optgroup label="Acciones">
