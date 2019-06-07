@@ -223,11 +223,29 @@
                             <td>{{ matricula.ciclo_formativo.ciclo }}</td>
                             <td>{{ matricula.ciclo_formativo.curso }}</td>
                             <td class="tdAccion">
-                                <a href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-                                <a ng-click="verMatricula($index)" href=""><img src="./img/editar.png" class="parpadeo"
+                                <!-- Asignar
+                                * Solo pueden ver este boton las matriculas nuevas -->
+                                <a ng-if="matricula.asignada == 'nueva'" href=""><img src="./img/asignar.png"
+                                        class="parpadeo" width="40px" title="Asignar Registro"
+                                        alt="Asignar Registro"></a>
+
+                                <!-- Editar
+                                * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
+                                <a ng-if="matricula.asignada == 'propia'" ng-click="verMatricula($index)" href=""><img
+                                        src="./img/editar.png" class="parpadeo" width="40px" title="Ver Registro"
+                                        alt="Ver Registro"></a>
+
+                                <!-- Ver
+                                * Solo pueden ver este boton las matriculas nuevas y las que no esten
+                                asignadas al usuario logeado -->
+                                <a ng-if="matricula.asignada == 'nueva' || matricula.asignada == 'yaAsignada'"
+                                    ng-click="verMatricula($index)" href=""><img src="./img/ver.png" class="parpadeo"
                                         width="40px" title="Ver Registro" alt="Ver Registro"></a>
-                                <a ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
+
+                                <!-- Borrar
+                                * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
+                                <a ng-if="matricula.asignada == 'propia'"
+                                    ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
                                         class="parpadeo" width="40px" title="Eliminar Registro"
                                         alt="Eliminar Registro"></a>
 

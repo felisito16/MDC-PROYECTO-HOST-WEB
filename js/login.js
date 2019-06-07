@@ -43,7 +43,7 @@ app.controller('controller', function ($scope, $http) {
             esas credenciales exactas, si existe creamos token y vamos a 
             inicio.html; Sino, mostramos alerta */
             if (response.data.usuario) {
-                localStorage.setItem("abreteSesamo", response.data.usuario._id);
+                localStorage.setItem("abreteSesamo", response.data.usuario[0]._id);
                 location.href = "inicio.html";
             } else {
                 alert("Usuario y/o contraseña incorrectas")

@@ -41,30 +41,27 @@ $(window).on("load", function () {
 
 // Angular, peticion API
 var app = angular.module('myApp', ['ngStorage']);
-app.controller('loadMatriculasPendientes', function ($scope, $ngStorage, $http) {
+app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $http) {
 
     /* Declaramos la url de la peticion */
     const uriCargar = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
     const uriAsignada = "https://proyecto-mdc-api.herokuapp.com/matriculaAsignada/" + localStorage.getItem("abreteSesamo")
 
-    $scope.indexPower = [];
+    $scope.idUsuarioSesion = localStorage.getItem('abreteSesamo')
 
-    $scope.IHAVETHEPOWER_ornot = function() {
-        angular.forEach($scope.matriculasPendientes, function(value, key) {
-            this.push(key + ': ' + value);
-          }, log);
-    };
+    /* $scope.IHAVETHEPOWER_ornot = function() { */
+
+    /* }; */
     /* Declaramos el $scope de la matricula que se visualiza al darle
     al boton de "Ver registro" */
     $scope.matriculaVer = [];
-    $scope.matsAsignadas = []
 
     /* Declaramos el $scope para las pendientes */
     $scope.matriculasPendientes = [];
 
     /* Hacemos la peticion de todas las matriculas con el estado
     Pendientes y la guardamos en el $scope de Pendientes */
-    $http.get(uriAsignada
+    /* $http.get(uriAsignada
     ).then(function (response) {
         var matriculasAsignadas;
         matriculasAsignadas = response.data.matricula
@@ -72,7 +69,7 @@ app.controller('loadMatriculasPendientes', function ($scope, $ngStorage, $http) 
         console.log($scope.matsAsignadas);
     }).catch(function (response) {
         console.error('Error', response.status, response.data);
-    })
+    }) */
 
     $http.post(uriCargar, {
         estado: "pendiente"
@@ -80,6 +77,23 @@ app.controller('loadMatriculasPendientes', function ($scope, $ngStorage, $http) 
         var matriculas;
         matriculas = response.data.matriculas
         $scope.matriculasPendientes = matriculas
+
+        angular.forEach($scope.matriculasPendientes, function (value, key) {
+
+            if (value.idUsuarioAsignado == "" || value.idUsuarioAsignado == undefined) {
+                $scope.matriculasPendientes[key]['asignada'] = 'nueva'
+            } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
+                $scope.matriculasPendientes[key]['asignada'] = 'propia'
+            } else {
+                $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
+            }
+
+            /* console.log($scope.idUsuarioSesion);
+            console.log("ID local key: " + key);
+            console.log("DATA value: " + value);
+            console.log("value Nombre : " + value.idUsuarioAsignado);
+            console.log("---------------"); */
+        });
         console.log($scope.matriculasPendientes);
     }).catch(function (response) {
         console.error('Error', response.status, response.data);
@@ -160,7 +174,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $ngStorage, $http) 
         a ver */
         $(".divTablaPendientes").show()
         $("#divMatriculaVer").hide()
-
     }
 
     $scope.Guardar = function () {
