@@ -178,24 +178,12 @@ body {
     float: right;
 }
 
-#menu-xs {
-    display: none;
-}
-
 @media (max-width:438px) {
     .tdCurso, .tdAnio, #thCurso, #thAnio {
         display: none
     }
     #buscador[type=search]:focus {
         width: 100px;
-    }
-
-    #menu-lg {
-        display: none;
-    }
-
-    #menu-xs {
-        display: unset;
     }
 }
 
