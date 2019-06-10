@@ -75,7 +75,9 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
 
             /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
             es una matricula nueva */
-            if (value.idUsuarioAsignado == "" || value.idUsuarioAsignado == undefined) {
+            if (value.idUsuarioAsignado == "" 
+            || value.idUsuarioAsignado == "x"
+            || value.idUsuarioAsignado == undefined) {
                 $scope.matriculasPendientes[key]['asignada'] = 'nueva'
 
                 /* Si el valor es igual al id del usuario logeado es una matricula
@@ -172,7 +174,9 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
     
                         /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
                         es una matricula nueva */
-                        if (value.idUsuarioAsignado == "" || value.idUsuarioAsignado == undefined) {
+                        if (value.idUsuarioAsignado == "" 
+                        || value.idUsuarioAsignado == "x"
+                        || value.idUsuarioAsignado == undefined) {
                             $scope.matriculasPendientes[key]['asignada'] = 'nueva'
     
                             /* Si el valor es igual al id del usuario logeado es una matricula
@@ -194,7 +198,68 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
                 })
-            }, 100)
+            }, 500)
+        }
+    }
+
+    $scope.desasignarMatricula = function (index) {
+        var r = confirm("¿Desea desasignarse la matricula?");
+        if (r == true) {
+
+            console.log($scope.matriculasPendientes[index]._id);
+            const uriAsignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.matriculasPendientes[index]._id
+            $http.put(uriAsignarMatricula, {
+                idUsuarioAsignado: "x"
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (response) {
+                console.log('Error', response.status, response.data);
+            })
+
+            /* Vaciamos $scope de las matriculas */
+            $scope.matriculasPendientes = [];
+
+            setTimeout( function() {
+                $http.post(uriCargar, {
+                    estado: "pendiente"
+                }).then(function (response) {
+                    var matriculas;
+                    matriculas = response.data.matriculas
+                    $scope.matriculasPendientes = matriculas
+    
+                    /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
+                    encuentran */
+                    angular.forEach($scope.matriculasPendientes, function (value, key) {
+    
+                        /* Asigamos niveles */
+    
+                        /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
+                        es una matricula nueva */
+                        if (value.idUsuarioAsignado == ""
+                        || value.idUsuarioAsignado == "x"
+                        || value.idUsuarioAsignado == undefined) {
+                            $scope.matriculasPendientes[key]['asignada'] = 'nueva'
+    
+                            /* Si el valor es igual al id del usuario logeado es una matricula
+                            que tiene asignada */
+                        } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
+                            $scope.matriculasPendientes[key]['asignada'] = 'propia'
+    
+                            /* Entonces lo unico que queda darle el nivel de que esta asignada
+                            a otro usuario del sistema diferente */
+                        } else {
+                            $scope.matriculasPendientes[key]['asignada'] = 'yaAsignada'
+                        }
+    
+                    });
+    
+                    /* Matriculas */
+                    console.log($scope.matriculasPendientes);
+    
+                }).catch(function (response) {
+                    console.error('Error', response.status, response.data);
+                })
+            }, 500)
         }
     }
 
