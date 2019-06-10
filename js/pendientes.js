@@ -45,14 +45,13 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
 
     /* Declaramos la url de la peticion de cargas de Matriculas */
     const uriCargar = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
-    const uriAsignada = "https://proyecto-mdc-api.herokuapp.com/matriculaAsignada/" + localStorage.getItem("abreteSesamo")
 
     /* Guardamos el id del usuario logeado */
     $scope.idUsuarioSesion = localStorage.getItem('abreteSesamo')
 
-    /* $scope.IHAVETHEPOWER_ornot = function() { */
+    /* Declaramos la variable que dara poder para ver o editar */
+    $scope.esEditable = false;
 
-    /* }; */
     /* Declaramos el $scope de la matricula que se visualiza al darle
     al boton de "Ver registro" */
     $scope.matriculaVer = [];
@@ -160,6 +159,13 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         $("#divMatriculaVer").show()
 
         /* TAREA Comprobar que el registro es el asignado */
+
+        if ($scope.matriculasPendientes[index].idUsuarioAsignado == "nueva"
+            || $scope.matriculasPendientes[index].idUsuarioAsignado == "yaAsignada") {
+            $scope.esEditable = true
+        } else {
+            $scope.esEditable = false
+        }
 
         $scope.verValueNombre = $scope.matriculasPendientes[index].nombre_completo.nombre
         $scope.verValuePrimerApellido = $scope.matriculasPendientes[index].nombre_completo.primer_apellido
