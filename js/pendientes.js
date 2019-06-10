@@ -50,7 +50,7 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
     $scope.idUsuarioSesion = localStorage.getItem('abreteSesamo')
 
     /* Declaramos la variable que dara poder para ver o editar */
-    $scope.esEditable = false;
+    $scope.esEditable = true;
 
     /* Declaramos el $scope de la matricula que se visualiza al darle
     al boton de "Ver registro" */
