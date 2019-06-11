@@ -178,6 +178,11 @@ body {
     float: right;
 }
 
+.div-estado-matricula {
+    width: auto;
+    float: right;
+}
+
 @media (max-width:438px) {
     .tdCurso, .tdAnio, #thCurso, #thAnio {
         display: none
@@ -195,7 +200,6 @@ body {
     #selectAccionRegistro {
         display: none
     }
-
     .tdAccion {
         text-align: right;
     }

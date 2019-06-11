@@ -201,17 +201,33 @@
                 </div>
                 <div>
                     <button class="btn btn-outline-secondary" ng-click="Volver()">Volver</button>
-                    <button class="btn btn-success" ng-click="Volver()">Guardar</button>
+                    <button ng-disabled="esEditable" class="btn btn-success"
+                        ng-click="actualizarMatricula()">Guardar</button>
 
-                    <div class="btn-group dropright">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                    <!--                     <div class="btn-group dropup">
+ -->
+                    <!-- <label for="">Cambiar estado de la matricula</label> -->
+                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Dropright
-                        </button>
-                        <div class="dropdown-menu">
-                            <!-- Dropdown menu links -->
+                            Cambiar estado matricula
+                        </button> -->
+
+                    <div class="input-group mb-3 div-estado-matricula">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
                         </div>
+                        <select ng-disabled="esEditable" class="custom-select" id="selectMatriculaEstado">
+                            <option selected value="pendiente">Pendiente</option>
+                            <option value="erronea">Errónea</option>
+                            <option value="finalizada">Finalizada</option>
+                        </select>
                     </div>
+
+                    <!-- <div class="dropdown-menu">
+                             Dropdown menu links
+                            <a class="dropdown-item" href="#">Erronea</a>
+                            <a class="dropdown-item" href="#">Finalizada</a>
+                        </div> -->
                 </div>
             </div>
             <div class="divTablaPendientes">
