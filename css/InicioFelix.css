@@ -17,29 +17,190 @@ body {
     margin-right: 5%;
 }
 
-.divTablaPendientes, .divTablaErroneas {
-    background: white;
-}
-
 .h2Registro {
     text-align: center;
-    color : black;
+    color: black;
     background: none;
 }
 
-.divContenedorPendientes {
+.divContenedorAsignadas {
     margin-top: 50px;
-    float: left;
-    width: 49%;
 }
 
-.divContenedorErroneas {
-    margin-top: 50px;
+.divTablaAsignadas {
+    background: white;
+}
+
+.inputSize20 {
+    width: 20%;
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+.inputSize10 {
+    width: 10%;
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+.divFormularioBusqueda {
+    margin-top: 2%;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table thead th {
+    vertical-align: middle;
+}
+
+.registroHover:hover {
+    background: lightblue
+}
+
+.ml {
+    margin-right: 2%
+}
+
+#divInputVer {
+    display: -webkit-box;
+}
+
+.filaFormulario {
+    height: 18%;
+    margin-top: 2.2vh;
+}
+
+.contenedorContenidoFormulario {
+    margin-top: 1vh;
+}
+
+.columnaFormulario label {
+    font-weight: bold;
+}
+
+/* Size de los inpus a seleccion */
+
+.inputSize10 {
+    width: 10%
+}
+
+.inputSize12-5 {
+    width: 12.5%
+}
+
+.inputSize15 {
+    width: 15%
+}
+
+.inputSize17-5 {
+    width: 17.5%
+}
+
+.inputSize20 {
+    width: 20%
+}
+
+.inputSize22-5 {
+    width: 22.5%
+}
+
+.inputSize25 {
+    width: 25%
+}
+
+.inputSize27-5 {
+    width: 27.5%
+}
+
+.inputSize30 {
+    width: 30%
+}
+
+.inputSize32-5 {
+    width: 32.5%
+}
+
+.inputSize35 {
+    width: 35%
+}
+
+.inputSize37-5 {
+    width: 37.5%
+}
+
+.tdAccion {
+    width: 245px;
+}
+
+.custom-select {
+    width: 130px;
+}
+
+#buscador {
+    outline: none;
+}
+
+#buscador[type=search] {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-size: 100%;
+}
+
+#buscador[type=search] {
+    background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+    border: solid 1px orange;
+    padding: 9px 10px 9px 40px;
+    width: 100px;
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    border-radius: 10em;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+
+#buscador[type=search]:focus {
+    width: 212px;
+    background-color: white;
+    border-color: green;
+    -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, .5);
+    -moz-box-shadow: 0 0 5px rgba(109, 207, 246, .5);
+    box-shadow: 0 0 5px rgba(109, 207, 246, .5);
+}
+
+#buscador::-webkit-input-placeholder {
+    color: black;
+}
+
+#selectAccionRegistro {
     float: right;
-    width: 49%;
 }
 
-.hide { content: "" }
+.div-estado-matricula {
+    width: auto;
+    float: right;
+}
 
-.registroPinchado { background: chocolate; }
-.registroHover { background: burlywood }
+@media (max-width:438px) {
+    .tdCurso, .tdAnio, #thCurso, #thAnio {
+        display: none
+    }
+    #buscador[type=search]:focus {
+        width: 100px;
+    }
+}
+
+@media (max-width:775px) {
+    .divContenedorTodo {
+        margin-left: unset;
+        margin-right: unset;
+    }
+    #selectAccionRegistro {
+        display: none
+    }
+    .tdAccion {
+        text-align: right;
+    }
+}

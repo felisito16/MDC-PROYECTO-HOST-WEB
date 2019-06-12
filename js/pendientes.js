@@ -124,26 +124,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         }
     }
 
-    /* Funcion DEPRECTAED */
-    $scope.cambiarEstadoErronea = function (index) {
-        const uri = "https://proyecto-mdc-api.herokuapp.com/cambiarEstadoMatricula/"
-
-        var r = confirm("¿Desea cambiar el estado de la matricula a Erronea?");
-        if (r == true) {
-            /* Hacemos la peticion de todas las matriculas con el estado
-            Pendientes y la guardamos en el $scope de Pendientes */
-            /* $http.post(uri)
-                .then(function (response) {
-                    console.log(response.data)
-                }).catch(function (response) {
-                    console.error('Error', response.status, response.data);
-                }) */
-
-            /* Borramos el registro del $scope local */
-            $scope.matriculasPendientes.splice(index, 1)
-        }
-    }
-
     /* Funcion para asignar la matricula seleccionada al usuario logeado */
     $scope.asignarMatricula = function (index) {
         var r = confirm("¿Desea asignarse la matricula?");
