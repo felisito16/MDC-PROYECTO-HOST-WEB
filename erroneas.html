@@ -204,14 +204,6 @@
                     <button ng-disabled="esEditable" class="btn btn-success"
                         ng-click="actualizarMatricula()">Guardar</button>
 
-                    <!--                     <div class="btn-group dropup">
- -->
-                    <!-- <label for="">Cambiar estado de la matricula</label> -->
-                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Cambiar estado matricula
-                        </button> -->
-
                     <div class="input-group mb-3 div-estado-matricula">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
@@ -222,12 +214,6 @@
                             <option value="finalizada">Finalizada</option>
                         </select>
                     </div>
-
-                    <!-- <div class="dropdown-menu">
-                             Dropdown menu links
-                            <a class="dropdown-item" href="#">Erronea</a>
-                            <a class="dropdown-item" href="#">Finalizada</a>
-                        </div> -->
                 </div>
             </div>
             <div class="divTablaErroneas">
@@ -249,58 +235,34 @@
                             <td class="tdCurso">{{ matricula.ciclo_formativo.ciclo }}</td>
                             <td class="tdAnio">{{ matricula.ciclo_formativo.curso }}</td>
                             <td class="tdAccion">
-                                <!-- Select de opciones de cambiar la matricula de estado 
-                                * -->
-                                <!-- <select id="selectAccionRegistro" class="custom-select" ng-model="selectedItem"
-                                    ng-change="selectedItemChanged($index)">
-                                    <option selected hidden value="">Opciones</option>
-                                    <optgroup label="Acciones">
-                                        <option value="Asignar">
-                                            Asignar
-                                        </option>
-                                        <option value="VerEditar">
-                                            Ver / Editar
-                                        </option>
-                                        <option value="Borrar">
-                                            Borrar
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Cambiar estado a">
-                                        <option selected hidden>Estado</option>
-                                        <option ng-click="cambiarEstadoErronea($index)" value="Erronea">
-                                            Erronea</option>
-                                        <option ng-click="cambiarEstadoFinalizada($index)" value="Finalizada">
-                                            Finalizada
-                                        </option>
-                                    </optgroup>
-                                </select> -->
+
                                 <!-- Asignar
-                                * Solo pueden ver este boton las matriculas nuevas -->
+                                    * Solo pueden ver este boton las matriculas nuevas -->
                                 <a ng-if="matricula.asignada == 'nueva'" ng-click="asignarMatricula($index)"
                                     href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
                                         title="Asignar Registro" alt="Asignar Registro"></a>
 
                                 <!-- Desasignar
-                                        * Solo pueden ver este boton las matriculas nuevas -->
+                                    * Solo pueden ver este boton las matriculas nuevas -->
                                 <a ng-if="matricula.asignada == 'propia'" ng-click="desasignarMatricula($index)"
                                     href=""><img src="./img/desasignar.png" class="parpadeo" width="40px"
                                         title="Desasignar Registro" alt="Desasignar Registro"></a>
 
                                 <!-- Editar
-                                * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
+                                    * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
                                 <a ng-if="matricula.asignada == 'propia'" ng-click="verMatricula($index)" href=""><img
                                         src="./img/editar.png" class="parpadeo" width="40px" title="Ver Registro"
                                         alt="Ver Registro"></a>
 
                                 <!-- Ver
-                                * Solo pueden ver este boton las matriculas nuevas y las que no esten
-                                asignadas al usuario logeado -->
+                                    * Solo pueden ver este boton las matriculas nuevas y las que no esten
+                                    asignadas al usuario logeado -->
                                 <a ng-if="matricula.asignada == 'nueva' || matricula.asignada == 'yaAsignada'"
                                     ng-click="verMatricula($index)" href=""><img src="./img/ver.png" class="parpadeo"
                                         width="40px" title="Ver Registro" alt="Ver Registro"></a>
 
                                 <!-- Borrar
-                                * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
+                                    * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
                                 <a ng-if="matricula.asignada == 'propia'"
                                     ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
                                         class="parpadeo" width="40px" title="Eliminar Registro"
