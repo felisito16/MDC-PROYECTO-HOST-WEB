@@ -112,12 +112,12 @@ app.controller('loadMatriculasErroneas', function ($scope, $localStorage, $http)
         if (r == true) {
             /* Hacemos la peticion de todas las matriculas con el estado
             Erroneas y la guardamos en el $scope de Erroneas */
-            /* $http.delete(uri)
+            $http.delete(uri)
                 .then(function (response) {
                     console.log(response.data)
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
-                }) */
+                })
 
             /* Borramos el registro del $scope local */
             $scope.matriculasErroneas.splice(index, 1)

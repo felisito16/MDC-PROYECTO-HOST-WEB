@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Pendientes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" href="./img/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+    <link rel="stylesheet" href="./css/barraNavegacion.css">
+    <link rel="stylesheet" href="./css/finalizadas.css">
+    <link rel="stylesheet" href="./css/animacionPendientes.css">
+    <script src="./js/menu.js"></script>
+</head>
+
+<body>
+    <div class="divContenedorTodo">
+
+        <nav class="nav nav-pills nav-justified" style="background-color: black; border-radius: none">
+            <a class="nav-item aAumentado">Inicio</a>
+            <a class="nav-item aAumentado">Pendientes</a>
+            <a class="nav-item aAumentado">Erróneas</a>
+            <a class="nav-item aAumentado">Finalizadas</a>
+            <a class="nav-item aAumentado">Ayuda</a>
+            <a class="nav-item aAumentado">Cerrar sesión</a>
+        </nav>
+
+        <div ng-app="myApp" ng-controller="loadMatriculasFinalizadas" class="divContenedorFinalizadas">
+            <div style="display: none" id="divMatriculaVer">
+                <div class="row filaContenido">
+
+                    <!-- Contenedor Contenido Formulario -->
+                    <div class="container-fluid contenedorContenidoFormulario">
+
+                        <!-- Fila Formulario 1 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Nombre -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="nombre">Nombre:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueNombre" type="text"
+                                    class="form-control" id="nombre" placeholder="Nombre">
+
+                            </div>
+
+                            <!-- Columna Primer Apellido -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="primerApellido">Primer Apellido:</label>
+                                <input ng-disabled="esEditable" ng-model="verValuePrimerApellido" type="text"
+                                    class="form-control" id="primerApellido" placeholder="Primer Apellido">
+
+                            </div>
+
+                            <!-- Columna Segundo Apellido -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="segundoApellido">Segundo Apellido:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueSegundoApellido" type="text"
+                                    class="form-control" id="segundoApellido" placeholder="Segundo Apellido">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Fila Formulario 2 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Fecha Nacimiento -->
+                            <div class="col-xs-1 col-sm-6 col-md-3 form-group columnaFormulario">
+
+                                <label for="fechaNacimiento">Fecha Nacimiento:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueFechaNacimiento" id="fechaNacimiento"
+                                    class="form-control" placeholder="Fecha Nacimiento">
+
+                            </div>
+
+                            <!-- Columna Tipo Documentacion -->
+                            <div class="col-xs-1 col-sm-6 col-md-3 form-group columnaFormulario">
+
+                                <label for="tipoDocumentacion">Tipo Documentacion:</label>
+                                <select ng-disabled="esEditable" ng-model="verValueTipoDocumentacion"
+                                    class="form-control" id="tipoDocumentacion">
+                                    <option hidden checked>Tipo Documentacion</option>
+                                    <option>NIF</option>
+                                    <option>NIE</option>
+                                </select>
+
+                            </div>
+
+                            <!-- Columna NIF/NIE -->
+                            <div class="col-xs-1 col-sm-6 col-md-3 form-group columnaFormulario">
+
+                                <label for="numDNI">NIF/NIE:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueNumeroDocumentacion" type="text"
+                                    class="form-control" id="numDNI" placeholder="NIF/NIE">
+
+                            </div>
+
+                            <!-- Columna Nacionalidad -->
+                            <div class="col-xs-1 col-sm-2 col-md-3 form-group columnaFormulario">
+
+                                <label for="nacionalidad">Nacionalidad:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueNacionalidad" type="text"
+                                    class="form-control" id="nacionalidad" placeholder="Nacionalidad">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Fila Formulario 3 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Provincia -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="provincia">Provincia:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueProvincia" type="text"
+                                    class="form-control" id="provincia" placeholder="Provincia">
+
+                            </div>
+
+                            <!-- Columna Localidad -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="nombreLocalidad">Localidad:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueLocalidad" type="text"
+                                    class="form-control" id="nombreLocalidad" placeholder="Localidad">
+
+                            </div>
+
+                            <!-- Columna Codigo Postal -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="cpLocalidad">Código Postal:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueCodigoPostal" type="text"
+                                    class="form-control" id="cpLocalidad" placeholder="Código Postal">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Fila Formulario 4 -->
+                        <div class="row filaFormulario">
+
+                            <!-- Columna Nombre de la Via -->
+                            <div class="col-xs-1 col-sm-2 col-md-3 form-group columnaFormulario">
+
+                                <label for="calleDom">Calle:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueCalleDomicilio" type="text"
+                                    class="form-control" id="calleDom" placeholder="calleDom">
+
+                            </div>
+
+
+                            <!-- Columna Numero -->
+                            <div class="col-xs-1 col-sm-2 col-md-2 form-group columnaFormulario">
+
+                                <label for="numeroDom">Número:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueNumeroDomicilio" type="text"
+                                    class="form-control" id="numeroDom" placeholder="Nº">
+
+                            </div>
+
+                            <!-- Columna Telefono -->
+                            <div class="col-xs-1 col-sm-2 col-md-3 form-group columnaFormulario">
+
+                                <label for="telefono">Teléfono:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueTelefono" type="text"
+                                    class="form-control" id="telefono" placeholder="Teléfono Fijo/Móvil">
+
+                            </div>
+
+                            <!-- Columna Correo Electronico -->
+                            <div class="col-xs-1 col-sm-2 col-md-4 form-group columnaFormulario">
+
+                                <label for="email">Correo Electrónico:</label>
+                                <input ng-disabled="esEditable" ng-model="verValueEmail" type="text"
+                                    class="form-control" id="email" placeholder="Correo Electrónico">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-outline-secondary" ng-click="Volver()">Volver</button>
+                    <button ng-disabled="esEditable" class="btn btn-success"
+                        ng-click="actualizarMatricula()">Guardar</button>
+
+                    <!--                     <div class="btn-group dropup">
+ -->
+                    <!-- <label for="">Cambiar estado de la matricula</label> -->
+                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Cambiar estado matricula
+                        </button> -->
+
+                    <div class="input-group mb-3 div-estado-matricula">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
+                        </div>
+                        <select ng-disabled="esEditable" class="custom-select" id="selectMatriculaEstado">
+                            <option selected value="pendiente">Pendiente</option>
+                            <option value="erronea">Errónea</option>
+                            <option value="finalizada">Finalizada</option>
+                        </select>
+                    </div>
+
+                    <!-- <div class="dropdown-menu">
+                             Dropdown menu links
+                            <a class="dropdown-item" href="#">Erronea</a>
+                            <a class="dropdown-item" href="#">Finalizada</a>
+                        </div> -->
+                </div>
+            </div>
+            <div class="divTablaFinalizadas">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th id="thCurso" scope="col">Curso</th>
+                            <th id="thAnio" scope="col">Año</th>
+                            <th class="text-center"><input type="search" id="buscador" placeholder="Buscador"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="animated fadeIn registroHover" ng-repeat="matricula in matriculasFinalizadas">
+                            <td>{{ matricula.nombre_completo.nombre 
+                                +" "+ matricula.nombre_completo.primer_apellido
+                                +" "+ matricula.nombre_completo.segundo_apellido }}
+                            </td>
+                            <td class="tdCurso">{{ matricula.ciclo_formativo.ciclo }}</td>
+                            <td class="tdAnio">{{ matricula.ciclo_formativo.curso }}</td>
+                            <td class="tdAccion">
+                                <!-- Select de opciones de cambiar la matricula de estado 
+                                * -->
+                                <!-- <select id="selectAccionRegistro" class="custom-select" ng-model="selectedItem"
+                                    ng-change="selectedItemChanged($index)">
+                                    <option selected hidden value="">Opciones</option>
+                                    <optgroup label="Acciones">
+                                        <option value="Asignar">
+                                            Asignar
+                                        </option>
+                                        <option value="VerEditar">
+                                            Ver / Editar
+                                        </option>
+                                        <option value="Borrar">
+                                            Borrar
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="Cambiar estado a">
+                                        <option selected hidden>Estado</option>
+                                        <option ng-click="cambiarEstadoErronea($index)" value="Erronea">
+                                            Erronea</option>
+                                        <option ng-click="cambiarEstadoFinalizada($index)" value="Finalizada">
+                                            Finalizada
+                                        </option>
+                                    </optgroup>
+                                </select> -->
+                                <!-- Asignar
+                                * Solo pueden ver este boton las matriculas nuevas -->
+                                <a ng-if="matricula.asignada == 'nueva'" ng-click="asignarMatricula($index)"
+                                    href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
+                                        title="Asignar Registro" alt="Asignar Registro"></a>
+
+                                <!-- Desasignar
+                                        * Solo pueden ver este boton las matriculas nuevas -->
+                                <a ng-if="matricula.asignada == 'propia'" ng-click="desasignarMatricula($index)"
+                                    href=""><img src="./img/desasignar.png" class="parpadeo" width="40px"
+                                        title="Desasignar Registro" alt="Desasignar Registro"></a>
+
+                                <!-- Editar
+                                * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
+                                <a ng-if="matricula.asignada == 'propia'" ng-click="verMatricula($index)" href=""><img
+                                        src="./img/editar.png" class="parpadeo" width="40px" title="Ver Registro"
+                                        alt="Ver Registro"></a>
+
+                                <!-- Ver
+                                * Solo pueden ver este boton las matriculas nuevas y las que no esten
+                                asignadas al usuario logeado -->
+                                <a ng-if="matricula.asignada == 'nueva' || matricula.asignada == 'yaAsignada'"
+                                    ng-click="verMatricula($index)" href=""><img src="./img/ver.png" class="parpadeo"
+                                        width="40px" title="Ver Registro" alt="Ver Registro"></a>
+
+                                <!-- Borrar
+                                * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->
+                                <a ng-if="matricula.asignada == 'propia'"
+                                    ng-click="deleteRegistro($index, matricula._id)" href=""><img src="./img/borrar.png"
+                                        class="parpadeo" width="40px" title="Eliminar Registro"
+                                        alt="Eliminar Registro"></a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="./js/finalizadas.js"></script>
+
+</html>

@@ -1,27 +1,50 @@
+// Cuando se cargue la ventana/pagina completamente
 if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abreteSesamo") == undefined) {
     window.location.href = "./login.html"
 }
 
 $(window).on("load", function () {
 
-    // Por defecto, Inicio activado en el menu
-    $("a.aAumentado:contains('Inicio')").addClass("activo").css({ "pointer-events": "none" })
+    // Por defecto, Finalizadas activado en el menu
+    $("a.aAumentado:contains('Finalizadas')").addClass("activo").css({ "pointer-events": "none" })
 
-    // Evento Hover Pendientes/Erroneas h2 (titulo)
+    // Ocultamos el div de la tabla por defecto, 
+    // hasta que se de el caso de que busque o consulte datos
+
+    // Evento Hover Finalizadas/Erroneas h2 (titulo)
     $("h2.h2Registro").hover(function () {
         $(this).css({ "background": "#212529", "color": "white" })
     }, function () {
         $(this).css({ "background": "none", "color": "black" })
     })
 
+    // Registrostablas
+    // Evento Hover registros
+    $("tbody tr").not(document.getElementsByClassName("registroPinchado")).hover(function () {
+        ($(this).hasClass("registroPinchado") == false) ? $(this).addClass("registroHover") : ""
+    }, function () {
+        $(this).removeClass("registroHover")
+    })
+
+    //  Evento Hover registroPinchado
+    $("tbody tr").click(function () {
+        $("tbody tr").not(this).removeClass("registroPinchado")
+        $(this).removeClass("registroHover").addClass("registroPinchado")
+    })
+
+    // Evento Boton Limpiar
+    $(".botonLimpiar").click(function () {
+        $("#buscador").val("")
+    })
+
 })
 
 // Angular, peticion API
 var app = angular.module('myApp', ['ngStorage']);
-app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http) {
+app.controller('loadMatriculasFinalizadas', function ($scope, $localStorage, $http) {
 
     /* Declaramos la url de la peticion de cargas de Matriculas */
-    const uriCargarAsignadas = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculasAsignadas/" + localStorage.getItem("abreteSesamo")
+    const uriCargar = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculas"
 
     /* Guardamos el id del usuario logeado */
     $scope.idUsuarioSesion = localStorage.getItem('abreteSesamo')
@@ -36,20 +59,20 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
     al boton de "Ver registro" */
     $scope.matriculaVer = [];
 
-    /* Declaramos el $scope para las pendientes */
-    $scope.matriculasAsignadas = [];
+    /* Declaramos el $scope para las Finalizadas */
+    $scope.matriculasFinalizadas = [];
 
-    /* Carga de las matriculas con estado pendiente */
-    $http.post(uriCargarAsignadas, {
-        rows: 5
+    /* Carga de las matriculas con estado finalizada */
+    $http.post(uriCargar, {
+        estado: "finalizada"
     }).then(function (response) {
         var matriculas;
         matriculas = response.data.matriculas
-        $scope.matriculasAsignadas = matriculas
+        $scope.matriculasFinalizadas = matriculas
 
         /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
         encuentran */
-        angular.forEach($scope.matriculasAsignadas, function (value, key) {
+        angular.forEach($scope.matriculasFinalizadas, function (value, key) {
 
             /* Asignamos niveles */
 
@@ -58,28 +81,27 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
             if (value.idUsuarioAsignado == ""
                 || value.idUsuarioAsignado == "x"
                 || value.idUsuarioAsignado == undefined) {
-                $scope.matriculasAsignadas[key]['asignada'] = 'nueva'
+                $scope.matriculasFinalizadas[key]['asignada'] = 'nueva'
 
                 /* Si el valor es igual al id del usuario logeado es una matricula
                 que tiene asignada */
             } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
-                $scope.matriculasAsignadas[key]['asignada'] = 'propia'
+                $scope.matriculasFinalizadas[key]['asignada'] = 'propia'
 
                 /* Entonces lo unico que queda darle el nivel de que esta asignada
                 a otro usuario del sistema diferente */
             } else {
-                $scope.matriculasAsignadas[key]['asignada'] = 'yaAsignada'
+                $scope.matriculasFinalizadas[key]['asignada'] = 'yaAsignada'
             }
 
         });
 
         /* Matriculas */
-        console.log($scope.matriculasAsignadas);
+        console.log($scope.matriculasFinalizadas);
 
     }).catch(function (response) {
         console.error('Error', response.status, response.data);
     })
-
 
     /* Funcion de borrar registro */
     $scope.deleteRegistro = function (index, idMatricula) {
@@ -89,7 +111,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
         if (r == true) {
             /* Hacemos la peticion de todas las matriculas con el estado
-            Pendientes y la guardamos en el $scope de Pendientes */
+            Finalizadas y la guardamos en el $scope de Finalizadas */
             $http.delete(uri)
                 .then(function (response) {
                     console.log(response.data)
@@ -98,7 +120,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
                 })
 
             /* Borramos el registro del $scope local */
-            $scope.matriculasAsignadas.splice(index, 1)
+            $scope.matriculasFinalizadas.splice(index, 1)
         }
     }
 
@@ -107,8 +129,8 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         var r = confirm("¿Desea asignarse la matricula?");
         if (r == true) {
             var idUsuarioLogeado = localStorage.getItem("abreteSesamo")
-            console.log($scope.matriculasAsignadas[index]._id);
-            const uriAsignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.matriculasAsignadas[index]._id
+            console.log($scope.matriculasFinalizadas[index]._id);
+            const uriAsignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.matriculasFinalizadas[index]._id
             $http.put(uriAsignarMatricula, {
                 idUsuarioAsignado: idUsuarioLogeado
             }).then(function (response) {
@@ -118,19 +140,19 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
             })
 
             /* Vaciamos $scope de las matriculas */
-            $scope.matriculasAsignadas = [];
+            $scope.matriculasFinalizadas = [];
 
             setTimeout(function () {
-                $http.post(uriCargarAsignadas, {
-                    rows: 5
+                $http.post(uriCargar, {
+                    estado: "finalizada"
                 }).then(function (response) {
                     var matriculas;
                     matriculas = response.data.matriculas
-                    $scope.matriculasAsignadas = matriculas
+                    $scope.matriculasFinalizadas = matriculas
 
                     /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
                     encuentran */
-                    angular.forEach($scope.matriculasAsignadas, function (value, key) {
+                    angular.forEach($scope.matriculasFinalizadas, function (value, key) {
 
                         /* Asignamos niveles */
 
@@ -139,23 +161,23 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
                         if (value.idUsuarioAsignado == ""
                             || value.idUsuarioAsignado == "x"
                             || value.idUsuarioAsignado == undefined) {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'nueva'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'nueva'
 
                             /* Si el valor es igual al id del usuario logeado es una matricula
                             que tiene asignada */
                         } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'propia'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'propia'
 
                             /* Entonces lo unico que queda darle el nivel de que esta asignada
                             a otro usuario del sistema diferente */
                         } else {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'yaAsignada'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'yaAsignada'
                         }
 
                     });
 
                     /* Matriculas */
-                    console.log($scope.matriculasAsignadas);
+                    console.log($scope.matriculasFinalizadas);
 
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
@@ -169,7 +191,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         var r = confirm("¿Desea desasignarse la matricula?");
         if (r == true) {
 
-            const uriDesasignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.matriculasAsignadas[index]._id
+            const uriDesasignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.matriculasFinalizadas[index]._id
             $http.put(uriDesasignarMatricula, {
                 idUsuarioAsignado: "x"
             }).then(function (response) {
@@ -179,44 +201,44 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
             })
 
             /* Vaciamos $scope de las matriculas */
-            $scope.matriculasAsignadas = [];
+            $scope.matriculasFinalizadas = [];
 
             setTimeout(function () {
-                $http.post(uriCargarAsignadas, {
-                    rows: 5
+                $http.post(uriCargar, {
+                    estado: "finalizada"
                 }).then(function (response) {
                     var matriculas;
                     matriculas = response.data.matriculas
-                    $scope.matriculasAsignadas = matriculas
+                    $scope.matriculasFinalizadas = matriculas
 
                     /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
                     encuentran */
-                    angular.forEach($scope.matriculasAsignadas, function (value, key) {
+                    angular.forEach($scope.matriculasFinalizadas, function (value, key) {
 
-                        /* Asignamos niveles */
+                        /* Asigamos niveles */
 
                         /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
                         es una matricula nueva */
                         if (value.idUsuarioAsignado == ""
                             || value.idUsuarioAsignado == "x"
                             || value.idUsuarioAsignado == undefined) {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'nueva'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'nueva'
 
                             /* Si el valor es igual al id del usuario logeado es una matricula
                             que tiene asignada */
                         } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'propia'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'propia'
 
                             /* Entonces lo unico que queda darle el nivel de que esta asignada
                             a otro usuario del sistema diferente */
                         } else {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'yaAsignada'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'yaAsignada'
                         }
 
                     });
 
                     /* Matriculas */
-                    console.log($scope.matriculasAsignadas);
+                    console.log($scope.matriculasFinalizadas);
 
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
@@ -270,44 +292,47 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
             })
 
             /* Vaciamos $scope de las matriculas */
-            $scope.matriculasAsignadas = [];
+            $scope.matriculasFinalizadas = [];
 
             setTimeout(function () {
-                $http.post(uriCargarAsignadas, {
-                    rows: 5
+                $http.post(uriCargar, {
+                    estado: "finalizada"
                 }).then(function (response) {
                     var matriculas;
                     matriculas = response.data.matriculas
-                    $scope.matriculasAsignadas = matriculas
+                    $scope.matriculasFinalizadas = matriculas
 
                     /* Recorremos las tablas almacenadas para asignar en que nivel de visualizacion se
                     encuentran */
-                    angular.forEach($scope.matriculasAsignadas, function (value, key) {
+                    angular.forEach($scope.matriculasFinalizadas, function (value, key) {
 
-                        /* Asignamos niveles */
+                        /* Asigamos niveles */
 
                         /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
                         es una matricula nueva */
                         if (value.idUsuarioAsignado == ""
                             || value.idUsuarioAsignado == "x"
                             || value.idUsuarioAsignado == undefined) {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'nueva'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'nueva'
 
                             /* Si el valor es igual al id del usuario logeado es una matricula
                             que tiene asignada */
                         } else if (value.idUsuarioAsignado == $scope.idUsuarioSesion) {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'propia'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'propia'
 
                             /* Entonces lo unico que queda darle el nivel de que esta asignada
                             a otro usuario del sistema diferente */
                         } else {
-                            $scope.matriculasAsignadas[key]['asignada'] = 'yaAsignada'
+                            $scope.matriculasFinalizadas[key]['asignada'] = 'yaAsignada'
                         }
 
                     });
 
                     /* Matriculas */
-                    console.log($scope.matriculasAsignadas);
+                    console.log($scope.matriculasFinalizadas);
+
+                    $(".divTablaFinalizadas").show()
+                    $("#divMatriculaVer").hide()
 
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
@@ -323,58 +348,58 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
         /* Ocultamos la tabla y mostramos la vista de la matricula 
         a ver */
-        $(".divTablaAsignadas").hide()
+        $(".divTablaFinalizadas").hide()
         $("#divMatriculaVer").show()
 
         /* TAREA Comprobar que el registro es el asignado */
 
-        if ($scope.matriculasAsignadas[index].asignada == "nueva"
-            || $scope.matriculasAsignadas[index].asignada == "yaAsignada") {
-            console.log($scope.matriculasAsignadas[index].asignada);
+        if ($scope.matriculasFinalizadas[index].asignada == "nueva"
+            || $scope.matriculasFinalizadas[index].asignada == "yaAsignada") {
+            console.log($scope.matriculasFinalizadas[index].asignada);
             $scope.esEditable = true
         } else {
-            console.log($scope.matriculasAsignadas[index].asignada);
+            console.log($scope.matriculasFinalizadas[index].asignada);
             $scope.esEditable = false
         }
 
-        $scope.idMatriculaSeleccionada = $scope.matriculasAsignadas[index]._id
-        $scope.verValueNombre = $scope.matriculasAsignadas[index].nombre_completo.nombre
-        $scope.verValuePrimerApellido = $scope.matriculasAsignadas[index].nombre_completo.primer_apellido
-        $scope.verValueSegundoApellido = $scope.matriculasAsignadas[index].nombre_completo.segundo_apellido
+        $scope.idMatriculaSeleccionada = $scope.matriculasFinalizadas[index]._id
+        $scope.verValueNombre = $scope.matriculasFinalizadas[index].nombre_completo.nombre
+        $scope.verValuePrimerApellido = $scope.matriculasFinalizadas[index].nombre_completo.primer_apellido
+        $scope.verValueSegundoApellido = $scope.matriculasFinalizadas[index].nombre_completo.segundo_apellido
 
-        var dia = $scope.matriculasAsignadas[index].fecha_nacimiento.dia
-        var mes = $scope.matriculasAsignadas[index].fecha_nacimiento.mes
-        var anio = $scope.matriculasAsignadas[index].fecha_nacimiento.anio
+        var dia = $scope.matriculasFinalizadas[index].fecha_nacimiento.dia
+        var mes = $scope.matriculasFinalizadas[index].fecha_nacimiento.mes
+        var anio = $scope.matriculasFinalizadas[index].fecha_nacimiento.anio
         var fechaNacimiento = dia + "/" + mes + "/" + anio
         /* $scope.verValueFechaNacimiento = fechaNacimiento */
 
-        $scope.verValueTipoDocumentacion = $scope.matriculasAsignadas[index].dni.tipo_documentacion
-        $scope.verValueNumeroDocumentacion = $scope.matriculasAsignadas[index].dni.numero
+        $scope.verValueTipoDocumentacion = $scope.matriculasFinalizadas[index].dni.tipo_documentacion
+        $scope.verValueNumeroDocumentacion = $scope.matriculasFinalizadas[index].dni.numero
 
-        $scope.verValueNacionalidad = $scope.matriculasAsignadas[index].nacionalidad
-        $scope.verValueProvincia = $scope.matriculasAsignadas[index].provincia
-        $scope.verValueLocalidad = $scope.matriculasAsignadas[index].localidad.nombre
-        var codigoPostal = $scope.matriculasAsignadas[index].localidad.codigo_postal
+        $scope.verValueNacionalidad = $scope.matriculasFinalizadas[index].nacionalidad
+        $scope.verValueProvincia = $scope.matriculasFinalizadas[index].provincia
+        $scope.verValueLocalidad = $scope.matriculasFinalizadas[index].localidad.nombre
+        var codigoPostal = $scope.matriculasFinalizadas[index].localidad.codigo_postal
         $scope.verValueCodigoPostal = codigoPostal
-        $scope.verValueCalleDomicilio = $scope.matriculasAsignadas[index].domicilio.calle
-        $scope.verValueNumeroDomicilio = $scope.matriculasAsignadas[index].domicilio.numero
+        $scope.verValueCalleDomicilio = $scope.matriculasFinalizadas[index].domicilio.calle
+        $scope.verValueNumeroDomicilio = $scope.matriculasFinalizadas[index].domicilio.numero
 
-        $scope.verValueTelefono = $scope.matriculasAsignadas[index].telefono
-        $scope.verValueEmail = $scope.matriculasAsignadas[index].email
+        $scope.verValueTelefono = $scope.matriculasFinalizadas[index].telefono
+        $scope.verValueEmail = $scope.matriculasFinalizadas[index].email
 
     }
 
     $scope.Volver = function () {
         /* Ocultamos la tabla y mostramos la vista de la matricula 
         a ver */
-        $(".divTablaAsignadas").show()
+        $(".divTablaFinalizadas").show()
         $("#divMatriculaVer").hide()
     }
 
     $scope.Guardar = function () {
         /* Ocultamos la tabla y mostramos la vista de la matricula 
         a ver */
-        $(".divTablaAsignadas").show()
+        $(".divTablaFinalizadas").show()
         $("#divMatriculaVer").hide()
     }
 

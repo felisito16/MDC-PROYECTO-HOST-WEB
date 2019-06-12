@@ -112,12 +112,12 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         if (r == true) {
             /* Hacemos la peticion de todas las matriculas con el estado
             Pendientes y la guardamos en el $scope de Pendientes */
-            /* $http.delete(uri)
+            $http.delete(uri)
                 .then(function (response) {
                     console.log(response.data)
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
-                }) */
+                })
 
             /* Borramos el registro del $scope local */
             $scope.matriculasPendientes.splice(index, 1)
