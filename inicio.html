@@ -37,7 +37,7 @@
             <a class="nav-item aAumentado">Pendientes</a>
             <a class="nav-item aAumentado">Erróneas</a>
             <a class="nav-item aAumentado">Finalizadas</a>
-            <a class="nav-item aAumentado">Ayuda</a>
+            <!-- <a class="nav-item aAumentado">Ayuda</a> -->
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
 
@@ -204,6 +204,8 @@
                     <button ng-disabled="esEditable" class="btn btn-success"
                         ng-click="actualizarMatricula()">Guardar</button>
 
+                    <input id="inputMotivoError" ng-model="motivoError" class="form-control" type="text"
+                        placeholder="Motivo de error de la matrícula">
                     <div class="input-group mb-3 div-estado-matricula">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
@@ -236,12 +238,6 @@
                             <td class="tdAnio">{{ matricula.ciclo_formativo.curso }}</td>
                             <td class="tdAccion">
 
-                                <!-- Asignar
-                                   * Solo pueden ver este boton las matriculas nuevas -->
-                                <a ng-if="matricula.asignada == 'nueva'" ng-click="asignarMatricula($index)"
-                                    href=""><img src="./img/asignar.png" class="parpadeo" width="40px"
-                                        title="Asignar Registro" alt="Asignar Registro"></a>
-
                                 <!-- Desasignar
                                     * Solo pueden ver este boton las matriculas nuevas -->
                                 <a ng-if="matricula.asignada == 'propia'" ng-click="desasignarMatricula($index)"
@@ -253,13 +249,6 @@
                                 <a ng-if="matricula.asignada == 'propia'" ng-click="verMatricula($index)" href=""><img
                                         src="./img/editar.png" class="parpadeo" width="40px" title="Ver Registro"
                                         alt="Ver Registro"></a>
-
-                                <!-- Ver
-                                    * Solo pueden ver este boton las matriculas nuevas y las que no esten
-                                    asignadas al usuario logeado -->
-                                <a ng-if="matricula.asignada == 'nueva' || matricula.asignada == 'yaAsignada'"
-                                    ng-click="verMatricula($index)" href=""><img src="./img/ver.png" class="parpadeo"
-                                        width="40px" title="Ver Registro" alt="Ver Registro"></a>
 
                                 <!-- Borrar
                                     * Solo pueden ver este boton las matriculas asignadas al usuario logeado -->

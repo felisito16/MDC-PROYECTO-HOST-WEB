@@ -37,6 +37,25 @@ $(window).on("load", function () {
         $("#buscador").val("")
     })
 
+    // Ocultamos por defecto el input, ya que todas las matriculas que podemos ver, 
+    // son pedientes solamente hasta que se cambien de estado al guardar
+    $("#inputMotivoError").hide()
+
+    // Mostrando motivo del error or not, al editar / ver
+    $("#selectMatriculaEstado").change(function () {
+        var valorEstadoMatricula = $("#selectMatriculaEstado option:selected").val()
+        console.log(valorEstadoMatricula);
+
+        if (valorEstadoMatricula == "erronea") {
+            console.log(valorEstadoMatricula);
+            $("#inputMotivoError").show()
+        } else {
+            console.log(valorEstadoMatricula);
+            $("#inputMotivoError").hide()
+        }
+
+    })
+
 })
 
 // Angular, peticion API
@@ -283,7 +302,8 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
                 telefono: $scope.verValueTelefono,
                 email: $scope.verValueEmail,
 
-                estado_matricula: estadoNuevoMatricula
+                estado_matricula: estadoNuevoMatricula,
+                motivoError: $scope.motivoError
 
             }).then(function (response) {
                 console.log(response.data);
@@ -387,6 +407,15 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         $scope.verValueTelefono = $scope.matriculasPendientes[index].telefono
         $scope.verValueEmail = $scope.matriculasPendientes[index].email
 
+    }
+
+    $scope.showMotivo = function () {
+        var estadoMatricula = $("#selectMatriculaEstado option:selected").val()
+        if (estadoMatricula == "erronea") {
+            return true
+        } else {
+            return false
+        }
     }
 
     $scope.Volver = function () {

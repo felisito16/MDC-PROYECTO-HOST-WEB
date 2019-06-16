@@ -14,6 +14,21 @@ $(window).on("load", function () {
         $(this).css({ "background": "none", "color": "black" })
     })
 
+    // Mostrando motivo del error or not, al editar / ver
+    $("#selectMatriculaEstado").change(function () {
+        var valorEstadoMatricula = $("#selectMatriculaEstado option:selected").val()
+        console.log(valorEstadoMatricula);
+
+        if (valorEstadoMatricula == "erronea") {
+            console.log(valorEstadoMatricula);
+            $("#inputMotivoError").show()
+        } else {
+            console.log(valorEstadoMatricula);
+            $("#inputMotivoError").hide()
+        }
+
+    })
+
 })
 
 // Angular, peticion API
@@ -41,7 +56,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
     /* Carga de las matriculas con estado pendiente */
     $http.post(uriCargarAsignadas, {
-        rows: 5
+        // nothing
     }).then(function (response) {
         var matriculas;
         matriculas = response.data.matriculas
@@ -122,7 +137,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
             setTimeout(function () {
                 $http.post(uriCargarAsignadas, {
-                    rows: 5
+                    // What else?
                 }).then(function (response) {
                     var matriculas;
                     matriculas = response.data.matriculas
@@ -183,7 +198,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
             setTimeout(function () {
                 $http.post(uriCargarAsignadas, {
-                    rows: 5
+                    // What else?
                 }).then(function (response) {
                     var matriculas;
                     matriculas = response.data.matriculas
@@ -261,7 +276,8 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
                 telefono: $scope.verValueTelefono,
                 email: $scope.verValueEmail,
 
-                estado_matricula: estadoNuevoMatricula
+                estado_matricula: estadoNuevoMatricula,
+                motivoError: $scope.motivoError
 
             }).then(function (response) {
                 console.log(response.data);
@@ -274,7 +290,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
             setTimeout(function () {
                 $http.post(uriCargarAsignadas, {
-                    rows: 5
+                    // What else?
                 }).then(function (response) {
                     var matriculas;
                     matriculas = response.data.matriculas
@@ -325,6 +341,8 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         a ver */
         $(".divTablaAsignadas").hide()
         $("#divMatriculaVer").show()
+        // La ocultamos por defecto
+        $("#inputMotivoError").hide()
 
         /* TAREA Comprobar que el registro es el asignado */
 
@@ -362,6 +380,12 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         $scope.verValueTelefono = $scope.matriculasAsignadas[index].telefono
         $scope.verValueEmail = $scope.matriculasAsignadas[index].email
 
+        var estadoMatriculaActual = $scope.matriculasAsignadas[index].estado_matricula
+        $("#selectMatriculaEstado option[value=" + estadoMatriculaActual + "]").prop('selected', 'selected')
+
+        if (estadoMatriculaActual == "erronea") {
+            $("#inputMotivoError").show()
+        }
     }
 
     $scope.Volver = function () {

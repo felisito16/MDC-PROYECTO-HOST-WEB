@@ -37,7 +37,7 @@
             <a class="nav-item aAumentado">Pendientes</a>
             <a class="nav-item aAumentado">Erróneas</a>
             <a class="nav-item aAumentado">Finalizadas</a>
-            <a class="nav-item aAumentado">Ayuda</a>
+            <!-- <a class="nav-item aAumentado">Ayuda</a> -->
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
 
@@ -203,15 +203,9 @@
                     <button class="btn btn-outline-secondary" ng-click="Volver()">Volver</button>
                     <button ng-disabled="esEditable" class="btn btn-success"
                         ng-click="actualizarMatricula()">Guardar</button>
-
-                    <!--                     <div class="btn-group dropup">
- -->
-                    <!-- <label for="">Cambiar estado de la matricula</label> -->
-                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Cambiar estado matricula
-                        </button> -->
-
+                    <!-- ng-if="" ng-model="" -->
+                    <input id="inputMotivoError" ng-model="motivoError" class="form-control" type="text"
+                        placeholder="Motivo de error de la matrícula">
                     <div class="input-group mb-3 div-estado-matricula">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
@@ -221,13 +215,8 @@
                             <option value="erronea">Errónea</option>
                             <option value="finalizada">Finalizada</option>
                         </select>
-                    </div>
 
-                    <!-- <div class="dropdown-menu">
-                             Dropdown menu links
-                            <a class="dropdown-item" href="#">Erronea</a>
-                            <a class="dropdown-item" href="#">Finalizada</a>
-                        </div> -->
+                    </div>
                 </div>
             </div>
             <div class="divTablaPendientes">
