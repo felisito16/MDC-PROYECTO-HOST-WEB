@@ -38,6 +38,9 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
     /* Declaramos la url de la peticion de cargas de Matriculas */
     const uriCargarAsignadas = "https://proyecto-mdc-api.herokuapp.com/cargarMatriculasAsignadas/" + localStorage.getItem("abreteSesamo")
 
+    /* Para desactivar el select de estados de de cuando editamos */
+    $scope.esFinalizada = false;
+
     /* Guardamos el id del usuario logeado */
     $scope.idUsuarioSesion = localStorage.getItem('abreteSesamo')
 
@@ -332,13 +335,13 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         }
     }
 
-
     /* Funcion que asigna los valores a los input al darle al boton ver
     / editar */
     $scope.verMatricula = function (index) {
 
         /* Ocultamos la tabla y mostramos la vista de la matricula 
         a ver */
+
         $(".divTablaAsignadas").hide()
         $("#divMatriculaVer").show()
         // La ocultamos por defecto
@@ -353,6 +356,11 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         } else {
             console.log($scope.matriculasAsignadas[index].asignada);
             $scope.esEditable = false
+            if ($scope.matriculasAsignadas[index].estado_matricula == "finalizada") {
+                $scope.esFinalizada = true
+            } else {
+                $scope.esFinalizada = false
+            }
         }
 
         $scope.idMatriculaSeleccionada = $scope.matriculasAsignadas[index]._id
@@ -385,6 +393,9 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
 
         if (estadoMatriculaActual == "erronea") {
             $("#inputMotivoError").show()
+        } else if (estadoMatriculaActual == "finalizada") {
+            console.log(estadoMatriculaActual);
+            $("#selectMatriculaEstado").prop("disabled", true);
         }
     }
 

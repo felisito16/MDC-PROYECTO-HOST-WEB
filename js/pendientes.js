@@ -273,6 +273,13 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
 
             const uriDesasignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.idMatriculaSeleccionada
             var estadoNuevoMatricula = $("#selectMatriculaEstado option:selected").val()
+
+            /* var fechaNacimiento = $scope.matriculaVer
+            fechaNacimiento = fechaNacimiento.split("/")
+            var dia = fechaNacimiento[0]
+            var mes = fechaNacimiento[1]
+            var anio = fechaNacimiento[2] */
+
             $http.put(uriDesasignarMatricula, {
 
                 nombre_completo: {
@@ -285,6 +292,12 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
                     numero: $scope.verValueNumeroDocumentacion,
                     tipo_documentacion: $scope.verValueTipoDocumentacion
                 },
+
+                /* fecha_nacimiento: {
+                    dia: dia,
+                    mes: mes,
+                    anio: anio
+                }, */
 
                 nacionalidad: $scope.verValueNacionalidad,
                 provincia: $scope.verValueProvincia,
@@ -407,15 +420,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         $scope.verValueTelefono = $scope.matriculasPendientes[index].telefono
         $scope.verValueEmail = $scope.matriculasPendientes[index].email
 
-    }
-
-    $scope.showMotivo = function () {
-        var estadoMatricula = $("#selectMatriculaEstado option:selected").val()
-        if (estadoMatricula == "erronea") {
-            return true
-        } else {
-            return false
-        }
     }
 
     $scope.Volver = function () {

@@ -204,30 +204,15 @@
                     <button ng-disabled="esEditable" class="btn btn-success"
                         ng-click="actualizarMatricula()">Guardar</button>
 
-                    <!--                     <div class="btn-group dropup">
- -->
-                    <!-- <label for="">Cambiar estado de la matricula</label> -->
-                    <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Cambiar estado matricula
-                        </button> -->
-
                     <div class="input-group mb-3 div-estado-matricula">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
                         </div>
-                        <select ng-disabled="esEditable" class="custom-select" id="selectMatriculaEstado">
-                            <option selected value="pendiente">Pendiente</option>
-                            <option value="erronea">Errónea</option>
-                            <option value="finalizada">Finalizada</option>
+                        <select ng-disabled="true" class="custom-select" id="selectMatriculaEstado">
+                            <option selected value="finalizada">Finalizada</option>
                         </select>
                     </div>
 
-                    <!-- <div class="dropdown-menu">
-                             Dropdown menu links
-                            <a class="dropdown-item" href="#">Erronea</a>
-                            <a class="dropdown-item" href="#">Finalizada</a>
-                        </div> -->
                 </div>
             </div>
             <div class="divTablaFinalizadas">
@@ -249,7 +234,7 @@
                             <td class="tdCurso">{{ matricula.ciclo_formativo.ciclo }}</td>
                             <td class="tdAnio">{{ matricula.ciclo_formativo.curso }}</td>
                             <td class="tdAccion">
-                                
+
                                 <!-- Asignar
                                 * Solo pueden ver este boton las matriculas nuevas -->
                                 <a ng-if="matricula.asignada == 'nueva'" ng-click="asignarMatricula($index)"

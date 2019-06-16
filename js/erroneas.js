@@ -37,6 +37,25 @@ $(window).on("load", function () {
         $("#buscador").val("")
     })
 
+    // Ocultamos por defecto el input, ya que todas las matriculas que podemos ver, 
+    // son pedientes solamente hasta que se cambien de estado al guardar
+    $("#inputMotivoError").show()
+
+    // Mostrando motivo del error or not, al editar / ver
+    $("#selectMatriculaEstado").change(function () {
+        var valorEstadoMatricula = $("#selectMatriculaEstado option:selected").val()
+        console.log(valorEstadoMatricula);
+
+        if (valorEstadoMatricula == "erronea") {
+            console.log(valorEstadoMatricula);
+            $("#inputMotivoError").show()
+        } else {
+            console.log(valorEstadoMatricula);
+            $("#inputMotivoError").hide()
+        }
+
+    })
+
 })
 
 // Angular, peticion API
@@ -283,7 +302,8 @@ app.controller('loadMatriculasErroneas', function ($scope, $localStorage, $http)
                 telefono: $scope.verValueTelefono,
                 email: $scope.verValueEmail,
 
-                estado_matricula: estadoNuevoMatricula
+                estado_matricula: estadoNuevoMatricula,
+                motivoError: $scope.motivoError
 
             }).then(function (response) {
                 console.log(response.data);
@@ -306,7 +326,7 @@ app.controller('loadMatriculasErroneas', function ($scope, $localStorage, $http)
                     encuentran */
                     angular.forEach($scope.matriculasErroneas, function (value, key) {
 
-                        /* Asigamos niveles */
+                        /* Asignamos niveles */
 
                         /* Si no existe un campo idUsuarioAsignado o tiene de valor ""
                         es una matricula nueva */
@@ -340,7 +360,6 @@ app.controller('loadMatriculasErroneas', function ($scope, $localStorage, $http)
             }, 500)
         }
     }
-
 
     /* Funcion que asigna los valores a los input al darle al boton ver
     / editar */
@@ -386,6 +405,7 @@ app.controller('loadMatriculasErroneas', function ($scope, $localStorage, $http)
 
         $scope.verValueTelefono = $scope.matriculasErroneas[index].telefono
         $scope.verValueEmail = $scope.matriculasErroneas[index].email
+        $scope.motivoError = $scope.matriculasErroneas[index].motivoError
 
     }
 

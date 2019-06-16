@@ -203,13 +203,13 @@
                     <button class="btn btn-outline-secondary" ng-click="Volver()">Volver</button>
                     <button ng-disabled="esEditable" class="btn btn-success"
                         ng-click="actualizarMatricula()">Guardar</button>
-
+                    <input id="inputMotivoError" ng-model="motivoError" class="form-control" type="text"
+                        placeholder="Motivo de error de la matrícula">
                     <div class="input-group mb-3 div-estado-matricula">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Estado de la matricula</label>
                         </div>
                         <select ng-disabled="esEditable" class="custom-select" id="selectMatriculaEstado">
-                            <option value="pendiente">Pendiente</option>
                             <option selected value="erronea">Errónea</option>
                             <option value="finalizada">Finalizada</option>
                         </select>
