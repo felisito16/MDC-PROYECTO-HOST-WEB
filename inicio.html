@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/InicioFelix.css">
     <link rel="stylesheet" href="./css/animacionPendientes.css">
+    <link rel="stylesheet" href="./css/coloresEstados.css">
     <script src="./js/menu.js"></script>
 </head>
 
@@ -229,7 +230,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="animated fadeIn registroHover" ng-repeat="matricula in matriculasAsignadas">
+                        <tr class="animated fadeIn registroHover" ng-class="colorEstado($index)" ng-repeat="matricula in matriculasAsignadas">
                             <td>{{ matricula.nombre_completo.nombre 
                                 +" "+ matricula.nombre_completo.primer_apellido
                                 +" "+ matricula.nombre_completo.segundo_apellido }}

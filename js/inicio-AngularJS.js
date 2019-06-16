@@ -335,6 +335,18 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         }
     }
 
+    /* Funcion para definir el color de fondo del registro segun 
+    el estado de la matricula */
+    $scope.colorEstado = function (index) {
+        if ($scope.matriculasAsignadas[index].estado_matricula == "finalizada") {
+            return "trFinalizada"
+        } else if ($scope.matriculasAsignadas[index].estado_matricula == "erronea") {
+            return "trErronea"
+        } else {
+            return "trPendiente"
+        }
+    }
+
     /* Funcion que asigna los valores a los input al darle al boton ver
     / editar */
     $scope.verMatricula = function (index) {

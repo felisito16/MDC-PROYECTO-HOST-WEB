@@ -122,6 +122,18 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         console.error('Error', response.status, response.data);
     })
 
+    /* Funcion para definir el color de fondo del registro segun 
+    el estado de la matricula */
+    $scope.colorEstado = function (index) {
+        if ($scope.matriculasPendientes[index].estado_matricula == "finalizada") {
+            return "trFinalizada"
+        } else if ($scope.matriculasPendientes[index].estado_matricula == "erronea") {
+            return "trErronea"
+        } else {
+            return "trPendiente"
+        }
+    }
+
     /* Funcion de borrar registro */
     $scope.deleteRegistro = function (index, idMatricula) {
         const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/" + idMatricula
