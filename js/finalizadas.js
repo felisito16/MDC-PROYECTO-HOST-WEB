@@ -3,6 +3,13 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
     window.location.href = "./login.html"
 }
 
+// Datepicker de Fecha de Nacimiento 
+$('#fechaNacimiento').datepicker({
+    locale: 'es-es',
+    uiLibrary: 'bootstrap4',
+    format: 'dd/mm/yyyy'
+});
+
 $(window).on("load", function () {
 
     // Por defecto, Finalizadas activado en el menu
@@ -254,6 +261,13 @@ app.controller('loadMatriculasFinalizadas', function ($scope, $localStorage, $ht
 
             const uriDesasignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.idMatriculaSeleccionada
             var estadoNuevoMatricula = $("#selectMatriculaEstado option:selected").val()
+
+            /* Fecha de nacimiento nueva, guardamos los valores y hacemos split */
+            var fechaNacimientoNueva = $("#fechaNacimiento").val()
+            var dia = fechaNacimientoNueva.split("/")[0]
+            var mes = fechaNacimientoNueva.split("/")[1]
+            var anio = fechaNacimientoNueva.split("/")[2]
+
             $http.put(uriDesasignarMatricula, {
 
                 nombre_completo: {
@@ -265,6 +279,12 @@ app.controller('loadMatriculasFinalizadas', function ($scope, $localStorage, $ht
                 dni: {
                     numero: $scope.verValueNumeroDocumentacion,
                     tipo_documentacion: $scope.verValueTipoDocumentacion
+                },
+
+                fecha_nacimiento: {
+                    dia: dia,
+                    mes: mes,
+                    anio: anio
                 },
 
                 nacionalidad: $scope.verValueNacionalidad,
@@ -371,7 +391,7 @@ app.controller('loadMatriculasFinalizadas', function ($scope, $localStorage, $ht
         var mes = $scope.matriculasFinalizadas[index].fecha_nacimiento.mes
         var anio = $scope.matriculasFinalizadas[index].fecha_nacimiento.anio
         var fechaNacimiento = dia + "/" + mes + "/" + anio
-        /* $scope.verValueFechaNacimiento = fechaNacimiento */
+        $scope.verValueFechaNacimiento = fechaNacimiento
 
         $scope.verValueTipoDocumentacion = $scope.matriculasFinalizadas[index].dni.tipo_documentacion
         $scope.verValueNumeroDocumentacion = $scope.matriculasFinalizadas[index].dni.numero

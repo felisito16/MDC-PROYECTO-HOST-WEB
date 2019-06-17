@@ -3,6 +3,13 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
     window.location.href = "./login.html"
 }
 
+// Datepicker de Fecha de Nacimiento 
+$('#fechaNacimiento').datepicker({
+    locale: 'es-es',
+    uiLibrary: 'bootstrap4',
+    format: 'dd/mm/yyyy'
+});
+
 $(window).on("load", function () {
 
     // Por defecto, Pendientes activado en el menu
@@ -273,11 +280,11 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
             const uriDesasignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.idMatriculaSeleccionada
             var estadoNuevoMatricula = $("#selectMatriculaEstado option:selected").val()
 
-            /* var fechaNacimiento = $scope.matriculaVer
-            fechaNacimiento = fechaNacimiento.split("/")
-            var dia = fechaNacimiento[0]
-            var mes = fechaNacimiento[1]
-            var anio = fechaNacimiento[2] */
+            /* Fecha de nacimiento nueva, guardamos los valores y hacemos split */
+            var fechaNacimientoNueva = $("#fechaNacimiento").val()
+            var dia = fechaNacimientoNueva.split("/")[0]
+            var mes = fechaNacimientoNueva.split("/")[1]
+            var anio = fechaNacimientoNueva.split("/")[2]
 
             $http.put(uriDesasignarMatricula, {
 
@@ -290,6 +297,12 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
                 dni: {
                     numero: $scope.verValueNumeroDocumentacion,
                     tipo_documentacion: $scope.verValueTipoDocumentacion
+                },
+
+                fecha_nacimiento: {
+                    dia: dia,
+                    mes: mes,
+                    anio: anio
                 },
 
                 nacionalidad: $scope.verValueNacionalidad,
@@ -397,7 +410,7 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         var mes = $scope.matriculasPendientes[index].fecha_nacimiento.mes
         var anio = $scope.matriculasPendientes[index].fecha_nacimiento.anio
         var fechaNacimiento = dia + "/" + mes + "/" + anio
-        /* $scope.verValueFechaNacimiento = fechaNacimiento */
+        $scope.verValueFechaNacimiento = fechaNacimiento
 
         $scope.verValueTipoDocumentacion = $scope.matriculasPendientes[index].dni.tipo_documentacion
         $scope.verValueNumeroDocumentacion = $scope.matriculasPendientes[index].dni.numero
