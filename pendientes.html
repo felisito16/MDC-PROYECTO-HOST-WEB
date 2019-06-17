@@ -231,8 +231,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="animated fadeIn registroHover" ng-class="colorEstado($index)"
-                            ng-repeat="matricula in matriculasPendientes">
+                        <tr class="animated fadeIn registroHover" ng-repeat="matricula in matriculasPendientes">
                             <td>{{ matricula.nombre_completo.nombre 
                                 +" "+ matricula.nombre_completo.primer_apellido
                                 +" "+ matricula.nombre_completo.segundo_apellido }}
@@ -240,31 +239,7 @@
                             <td class="tdCurso">{{ matricula.ciclo_formativo.ciclo }}</td>
                             <td class="tdAnio">{{ matricula.ciclo_formativo.curso }}</td>
                             <td class="tdAccion">
-                                <!-- Select de opciones de cambiar la matricula de estado 
-                                * -->
-                                <!-- <select id="selectAccionRegistro" class="custom-select" ng-model="selectedItem"
-                                    ng-change="selectedItemChanged($index)">
-                                    <option selected hidden value="">Opciones</option>
-                                    <optgroup label="Acciones">
-                                        <option value="Asignar">
-                                            Asignar
-                                        </option>
-                                        <option value="VerEditar">
-                                            Ver / Editar
-                                        </option>
-                                        <option value="Borrar">
-                                            Borrar
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Cambiar estado a">
-                                        <option selected hidden>Estado</option>
-                                        <option ng-click="cambiarEstadoErronea($index)" value="Erronea">
-                                            Erronea</option>
-                                        <option ng-click="cambiarEstadoFinalizada($index)" value="Finalizada">
-                                            Finalizada
-                                        </option>
-                                    </optgroup>
-                                </select> -->
+
                                 <!-- Asignar
                                 * Solo pueden ver este boton las matriculas nuevas -->
                                 <a ng-if="matricula.asignada == 'nueva'" ng-click="asignarMatricula($index)"

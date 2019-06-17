@@ -38,7 +38,6 @@
             <a class="nav-item aAumentado">Pendientes</a>
             <a class="nav-item aAumentado">Erróneas</a>
             <a class="nav-item aAumentado">Finalizadas</a>
-            <!-- <a class="nav-item aAumentado">Ayuda</a> -->
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
 
@@ -228,7 +227,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="animated fadeIn registroHover" ng-class="colorEstado($index)" ng-repeat="matricula in matriculasErroneas">
+                        <tr class="animated fadeIn registroHover" ng-repeat="matricula in matriculasErroneas">
                             <td>{{ matricula.nombre_completo.nombre 
                                 +" "+ matricula.nombre_completo.primer_apellido
                                 +" "+ matricula.nombre_completo.segundo_apellido }}

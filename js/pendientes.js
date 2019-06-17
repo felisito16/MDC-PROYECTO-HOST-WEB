@@ -122,18 +122,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         console.error('Error', response.status, response.data);
     })
 
-    /* Funcion para definir el color de fondo del registro segun 
-    el estado de la matricula */
-    $scope.colorEstado = function (index) {
-        if ($scope.matriculasPendientes[index].estado_matricula == "finalizada") {
-            return "trFinalizada"
-        } else if ($scope.matriculasPendientes[index].estado_matricula == "erronea") {
-            return "trErronea"
-        } else {
-            return "trPendiente"
-        }
-    }
-
     /* Funcion de borrar registro */
     $scope.deleteRegistro = function (index, idMatricula) {
         const uri = "https://proyecto-mdc-api.herokuapp.com/deleteMatricula/" + idMatricula
@@ -160,7 +148,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
         var r = confirm("¿Desea asignarse la matricula?");
         if (r == true) {
             var idUsuarioLogeado = localStorage.getItem("abreteSesamo")
-            console.log($scope.matriculasPendientes[index]._id);
             const uriAsignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.matriculasPendientes[index]._id
             $http.put(uriAsignarMatricula, {
                 idUsuarioAsignado: idUsuarioLogeado
@@ -304,12 +291,6 @@ app.controller('loadMatriculasPendientes', function ($scope, $localStorage, $htt
                     numero: $scope.verValueNumeroDocumentacion,
                     tipo_documentacion: $scope.verValueTipoDocumentacion
                 },
-
-                /* fecha_nacimiento: {
-                    dia: dia,
-                    mes: mes,
-                    anio: anio
-                }, */
 
                 nacionalidad: $scope.verValueNacionalidad,
                 provincia: $scope.verValueProvincia,

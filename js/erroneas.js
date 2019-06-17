@@ -266,18 +266,6 @@ app.controller('loadMatriculasErroneas', function ($scope, $localStorage, $http)
         }
     }
 
-    /* Funcion para definir el color de fondo del registro segun 
-    el estado de la matricula */
-    $scope.colorEstado = function (index) {
-        if ($scope.matriculasErroneas[index].estado_matricula == "finalizada") {
-            return "trFinalizada"
-        } else if ($scope.matriculasErroneas[index].estado_matricula == "erronea") {
-            return "trErronea"
-        } else {
-            return "trPendiente"
-        }
-    }
-
     /* Funcion para cuando guardamos una matricula al darle a Editar */
     $scope.actualizarMatricula = function (index) {
         var r = confirm("¿Desea actualizar la matricula?");
