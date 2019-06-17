@@ -2,6 +2,13 @@ if (localStorage.getItem("abreteSesamo") == null || localStorage.getItem("abrete
     window.location.href = "./login.html"
 }
 
+// Datepicker de Fecha de Nacimiento 
+$('#fechaNacimiento').datepicker({
+    locale: 'es-es',
+    uiLibrary: 'bootstrap4',
+    format: 'dd/mm/yyyy'
+});
+
 $(window).on("load", function () {
 
     // Por defecto, Inicio activado en el menu
@@ -247,10 +254,21 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
     $scope.actualizarMatricula = function (index) {
         var r = confirm("¿Desea actualizar la matricula?");
         if (r == true) {
+            $("#divMatriculaVer").hide()
 
-            const uriDesasignarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.idMatriculaSeleccionada
+            /* URL de la peticion */
+            const uriActualizarMatricula = "https://proyecto-mdc-api.herokuapp.com/asignarMatricula/" + $scope.idMatriculaSeleccionada
+
+            /* Guardamos el estado nuevo de la matricula */
             var estadoNuevoMatricula = $("#selectMatriculaEstado option:selected").val()
-            $http.put(uriDesasignarMatricula, {
+
+            /* Fecha de nacimiento nueva, guardamos los valores y hacemos split */
+            var fechaNacimientoNueva = $("#fechaNacimiento").val()
+            var dia = fechaNacimientoNueva.split("/")[0]
+            var mes = fechaNacimientoNueva.split("/")[1]
+            var anio = fechaNacimientoNueva.split("/")[2]
+
+            $http.put(uriActualizarMatricula, {
 
                 nombre_completo: {
                     nombre: $scope.verValueNombre,
@@ -261,6 +279,12 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
                 dni: {
                     numero: $scope.verValueNumeroDocumentacion,
                     tipo_documentacion: $scope.verValueTipoDocumentacion
+                },
+
+                fecha_nacimiento: {
+                    dia: dia,
+                    mes: mes,
+                    anio: anio
                 },
 
                 nacionalidad: $scope.verValueNacionalidad,
@@ -328,6 +352,9 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
                     /* Matriculas */
                     console.log($scope.matriculasAsignadas);
 
+                    $(".divTablaAsignadas").show()
+                    $("#divMatriculaVer").hide()
+
                 }).catch(function (response) {
                     console.error('Error', response.status, response.data);
                 })
@@ -384,7 +411,7 @@ app.controller('loadMatriculasAsignadas', function ($scope, $localStorage, $http
         var mes = $scope.matriculasAsignadas[index].fecha_nacimiento.mes
         var anio = $scope.matriculasAsignadas[index].fecha_nacimiento.anio
         var fechaNacimiento = dia + "/" + mes + "/" + anio
-        /* $scope.verValueFechaNacimiento = fechaNacimiento */
+        $scope.verValueFechaNacimiento = fechaNacimiento
 
         $scope.verValueTipoDocumentacion = $scope.matriculasAsignadas[index].dni.tipo_documentacion
         $scope.verValueNumeroDocumentacion = $scope.matriculasAsignadas[index].dni.numero

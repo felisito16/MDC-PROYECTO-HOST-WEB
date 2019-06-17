@@ -23,6 +23,11 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
     <link rel="stylesheet" href="./css/barraNavegacion.css">
     <link rel="stylesheet" href="./css/InicioFelix.css">
     <link rel="stylesheet" href="./css/animacionPendientes.css">
@@ -38,7 +43,6 @@
             <a class="nav-item aAumentado">Pendientes</a>
             <a class="nav-item aAumentado">Erróneas</a>
             <a class="nav-item aAumentado">Finalizadas</a>
-            <!-- <a class="nav-item aAumentado">Ayuda</a> -->
             <a class="nav-item aAumentado">Cerrar sesión</a>
         </nav>
 
@@ -230,7 +234,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="animated fadeIn registroHover" ng-class="colorEstado($index)" ng-repeat="matricula in matriculasAsignadas">
+                        <tr class="animated fadeIn registroHover" ng-class="colorEstado($index)"
+                            ng-repeat="matricula in matriculasAsignadas">
                             <td>{{ matricula.nombre_completo.nombre 
                                 +" "+ matricula.nombre_completo.primer_apellido
                                 +" "+ matricula.nombre_completo.segundo_apellido }}
